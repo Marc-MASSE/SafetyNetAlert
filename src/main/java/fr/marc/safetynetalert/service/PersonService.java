@@ -9,28 +9,34 @@ import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.PersonRepository;
 import lombok.Data;
 
+/*
+ * Each method has the sole purpose of calling a method of the employeeRepository.
+ * 
+ * @Marc
+ */
+
 @Data
 @Service
 public class PersonService {
-	
+
 	@Autowired
-    private PersonRepository personRepository;
+	private PersonRepository personRepository;
 
-    public Optional<Person> getPerson(final Long id) {
-        return personRepository.findById(id);
-    }
+	public Optional<Person> getPerson(final Long id) {
+		return personRepository.findById(id);
+	}
 
-    public Iterable<Person> getPersons() {
-        return personRepository.findAll();
-    }
+	public Iterable<Person> getPersons() {
+		return personRepository.findAll();
+	}
 
-    public void deletePerson(final Long id) {
-        personRepository.deleteById(id);
-    }
+	public void deletePerson(final Long id) {
+		personRepository.deleteById(id);
+	}
 
-    public Person savePerson(Person person) {
-        Person savedPerson = personRepository.save(person);
-        return savedPerson;
-    }
+	public Person savePerson(Person person) {
+		Person savedPerson = personRepository.save(person);
+		return savedPerson;
+	}
 
 }
