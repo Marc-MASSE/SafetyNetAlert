@@ -16,28 +16,83 @@ import lombok.Data;
  */
 
 @Data
-@Entity
-@Table(name = "persons")
 public class Person {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	public String firstName;
 
-	@Column(name = "first_name")
-	private String firstName;
+	public String lastName;
 
-	@Column(name = "last_name")
-	private String lastName;
+	public String address;
 
-	private String address;
+	public String city;
 
-	private String city;
+	public String zip;
 
-	private int zip;
+	public String phone;
 
-	private String phone;
+	public String email;
 
-	private String email;
+	private Person(String firstName, String lastName, String phone, String zip, String address, String city,
+			String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.zip = zip;
+		this.address = address;
+		this.city = city;
+		this.email = email;
+	}
+
+	public static class PersonBuilder {
+		private String firstName;
+		private String lastName;
+		private String phone;
+		private String zip;
+		private String address;
+		private String city;
+		private String email;
+
+		public PersonBuilder() {
+		}
+
+		public PersonBuilder firstName(String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+
+		public PersonBuilder lastName(String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+
+		public PersonBuilder phone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public PersonBuilder zip(String zip) {
+			this.zip = zip;
+			return this;
+		}
+
+		public PersonBuilder address(String address) {
+			this.address = address;
+			return this;
+		}
+
+		public PersonBuilder city(String city) {
+			this.city = city;
+			return this;
+		}
+
+		public PersonBuilder email(String email) {
+			this.email = email;
+			return this;
+		}
+
+		public Person build() {
+			return new Person(firstName, lastName, phone, zip, address, city, email);
+		}
+	}
 
 }

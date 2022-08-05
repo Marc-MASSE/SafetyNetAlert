@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.Person;
-import fr.marc.safetynetalert.service.PersonService;
+import fr.marc.safetynetalert.service.impl.PersonServiceImpl;
 
 @RestController
 public class PersonController {
 
     @Autowired
-    private PersonService personService;
+    private PersonServiceImpl personService;
 
     /**
     * Read - Get all employees
