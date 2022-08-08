@@ -51,18 +51,23 @@ public class SafetynetalertApplication {
 
 		System.err.println("---------------------------------------------------------------------------");
 
-		// List<Person> personsFinded = persons.stream().filter(p -> p.firstName ==
-		// "Brian").collect(Collectors.toList());
-		// personsFinded.forEach(p -> Display.thisPerson(p));
 
-		for (Person person : persons) {
+		List<Person> personsFinded = persons.stream().filter(p -> p.firstName == "Brian").collect(Collectors.toList());
+		personsFinded.forEach(p -> Display.thisPerson(p));
 
-			if (person.firstName == "Eric" && person.lastName == "Cadigan") {
-				Display.thisPerson(person);
-				break;
-			}
-		}
-		System.out.println("Personne non trouvée");
+		System.err.println("---------------------------------------------------------------------------");		
+		
+		persons.stream().filter(p -> p.firstName == "Brian").forEach(p -> Display.thisPerson(p));
+
+		System.err.println("---------------------------------------------------------------------------");		
+		
+		/*
+		 * for (Person person : persons) {
+		 * 
+		 * if (person.firstName == "Eric" && person.lastName == "Cadigan") {
+		 * Display.thisPerson(person); break; } }
+		 * System.out.println("Personne non trouvée");
+		 */
 	}
 
 }
