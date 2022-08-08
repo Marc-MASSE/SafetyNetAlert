@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.Person;
@@ -13,25 +12,31 @@ import fr.marc.safetynetalert.service.IPersonService;
 /*
  * 
  * 
- * @Marc
+ * @Author Marc
  */
 
 @Service
 public class PersonServiceImpl implements IPersonService {
 
+	/*
+	 * @param - firstName and lastName
+	 * @return - a single person according to his firstName and lastName
+	 * 
+	 */
+
 	@Override
 	public Optional<Person> getPerson(String firstName, String lastName) {
 		// TODO Auto-generated method stub
 		List<Person> personsList = new ArrayList<>();
-		
+
 		personsList = Extract.listOfPersons();
-		
+
 		for (Person person : personsList) {
-			
+
 			if (person.firstName == firstName && person.lastName == lastName) {
 				return Optional.ofNullable(person);
-				
-			}else {
+
+			} else {
 				return Optional.empty();
 			}
 		}

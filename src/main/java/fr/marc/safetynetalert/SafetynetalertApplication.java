@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.boot.SpringApplication;
@@ -50,9 +51,18 @@ public class SafetynetalertApplication {
 
 		System.err.println("---------------------------------------------------------------------------");
 
-		List<Person> personsFinded = persons.stream().filter(p -> p.firstName == "Brian").collect(Collectors.toList());
-		personsFinded.forEach(p -> Display.thisPerson(p));
+		// List<Person> personsFinded = persons.stream().filter(p -> p.firstName ==
+		// "Brian").collect(Collectors.toList());
+		// personsFinded.forEach(p -> Display.thisPerson(p));
 
+		for (Person person : persons) {
+
+			if (person.firstName == "Eric" && person.lastName == "Cadigan") {
+				Display.thisPerson(person);
+				break;
+			}
+		}
+		System.out.println("Personne non trouvée");
 	}
 
 }
