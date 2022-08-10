@@ -20,27 +20,25 @@ public class PersonServiceImpl implements IPersonService {
 
 	/*
 	 * @param - firstName and lastName
+	 * 
 	 * @return - a single person according to his firstName and lastName
 	 * 
 	 */
 
 	@Override
-	public Optional<Person> getPerson(String firstName, String lastName) {
+	public List<Person> getPerson(String firstName, String lastName) {
 		// TODO Auto-generated method stub
-		List<Person> personsList = new ArrayList<>();
+		List<Person> persons = new ArrayList<>();
+		List<Person> personsFinded = new ArrayList<>();
 
-		personsList = Extract.listOfPersons();
+		persons = Extract.listOfPersons();
 
-		for (Person person : personsList) {
-
-			if (person.firstName == firstName && person.lastName == lastName) {
-				return Optional.ofNullable(person);
-
-			} else {
-				return Optional.empty();
+		persons.forEach(p -> {
+			if (p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)) {
+				personsFinded.add(p);
 			}
-		}
-		return null;
+		});
+		return personsFinded;
 	}
 
 	/*

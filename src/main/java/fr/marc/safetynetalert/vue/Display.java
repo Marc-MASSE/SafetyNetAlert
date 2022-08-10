@@ -6,7 +6,7 @@ public class Display {
 
 	public static void thisPerson(Person p) {
 
-		System.out.println(p.firstName.concat(p.lastName).concat(p.address).concat(p.city).concat(p.phone).concat(p.zip)
-				.concat(p.email));
+		System.out.println(p.getFirstName().concat(p.getLastName()).concat(p.getAddress()).concat(p.getCity()).concat(p.getPhone()).concat(p.getZip())
+				.concat(p.getEmail()));
 	}
 }

@@ -1,5 +1,6 @@
 package fr.marc.safetynetalert.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class PersonController {
     * @return - a single person according to his firstName and lastName
     */   
     @GetMapping("/person/{firstName}/{lastName}")
-    public Optional<Person> getPerson(@PathVariable String firstName, @PathVariable String lastName) {
+    public List<Person> getPerson(@PathVariable String firstName, @PathVariable String lastName) {
      	
         return personService.getPerson(firstName, lastName);
     }

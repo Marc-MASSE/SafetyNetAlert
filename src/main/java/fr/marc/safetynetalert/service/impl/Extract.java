@@ -10,6 +10,7 @@ import com.jsoniter.any.Any;
 import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.JSONFileReader;
+import lombok.extern.log4j.Log4j2;
 
 public class Extract {
 	
@@ -20,6 +21,7 @@ public class Extract {
 			iter = JsonIterator.parse(JSONFileReader.read(DBConstants.PATH_TO_JSON_FILE));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			//log.error ("data.json file not found");
 			e.printStackTrace();
 		}
 
@@ -33,10 +35,17 @@ public class Extract {
 		Any personAny = any.get("persons");
 		List<Person> persons = new ArrayList<>();
 
-		personAny.forEach(a -> persons.add(new Person.PersonBuilder().firstName(a.get("firstName").toString())
-				.address(a.get("address").toString()).city(a.get("city").toString())
-				.lastName(a.get("lastName").toString()).phone(a.get("phone").toString()).zip(a.get("zip").toString())
-				.email(a.get("email").toString()).build()));
+		personAny.forEach(a -> {
+			Person person = new Person();
+			person.setFirstName(a.get("firstName").toString());
+			person.setLastName(a.get("lastName").toString());
+			person.setAddress(a.get("address").toString());
+			person.setCity(a.get("city").toString());
+			person.setZip(a.get("zip").toString());
+			person.setPhone(a.get("phone").toString());
+			person.setEmail(a.get("email").toString());
+			persons.add(person);
+		});
 		
 		return persons;
 		

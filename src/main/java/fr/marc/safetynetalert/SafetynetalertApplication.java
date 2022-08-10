@@ -42,22 +42,33 @@ public class SafetynetalertApplication {
 		Any personAny = any.get("persons");
 		List<Person> persons = new ArrayList<>();
 
-		personAny.forEach(a -> persons.add(new Person.PersonBuilder().firstName(a.get("firstName").toString())
-				.address(a.get("address").toString()).city(a.get("city").toString())
-				.lastName(a.get("lastName").toString()).phone(a.get("phone").toString()).zip(a.get("zip").toString())
-				.email(a.get("email").toString()).build()));
+		personAny.forEach(a -> {
+			Person person = new Person();
+			person.setFirstName(a.get("firstName").toString());
+			person.setLastName(a.get("lastName").toString());
+			person.setAddress(a.get("address").toString());
+			person.setCity(a.get("city").toString());
+			person.setZip(a.get("zip").toString());
+			person.setPhone(a.get("phone").toString());
+			person.setEmail(a.get("email").toString());
+			persons.add(person);
+		});
 
 		persons.forEach(p -> Display.thisPerson(p));
 
 		System.err.println("---------------------------------------------------------------------------");
 
 
-		List<Person> personsFinded = persons.stream().filter(p -> p.firstName == "Brian").collect(Collectors.toList());
+		List<Person> personsFinded = new ArrayList<>();
+		persons.forEach(p ->{
+			if (p.getFirstName().equals("Eric")) {
+				personsFinded.add(p);
+			}
+		});
 		personsFinded.forEach(p -> Display.thisPerson(p));
 
 		System.err.println("---------------------------------------------------------------------------");		
 		
-		persons.stream().filter(p -> p.firstName == "Brian").forEach(p -> Display.thisPerson(p));
 
 		System.err.println("---------------------------------------------------------------------------");		
 		
