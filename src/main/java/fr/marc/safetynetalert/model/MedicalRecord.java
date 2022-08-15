@@ -10,6 +10,19 @@ public class MedicalRecord {
 	private List<String> medications;
 	private List<String> allergies;
 
+	public MedicalRecord() {
+	}
+	
+	public MedicalRecord(String firstName, String lastName, String birthdate, List<String> medications,
+			List<String> allergies) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthdate = birthdate;
+		this.medications = medications;
+		this.allergies = allergies;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

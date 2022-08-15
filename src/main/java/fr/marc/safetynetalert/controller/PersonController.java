@@ -1,23 +1,20 @@
 package fr.marc.safetynetalert.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.Person;
-import fr.marc.safetynetalert.service.impl.PersonServiceImpl;
+import fr.marc.safetynetalert.service.IPersonService;
 
 @RestController
 public class PersonController {
 
-    @Autowired
-    private PersonServiceImpl personService;
-
-    /**
+	@Autowired
+    IPersonService personService;
+ 
+	/**
     * Read - Get all persons
     * @return - An Iterable object of Person full filled
     */
@@ -31,11 +28,13 @@ public class PersonController {
     * Read - Get one person
     * @return - a single person according to his firstName and lastName
     */   
-    @GetMapping("/person/{firstName}/{lastName}")
-    public List<Person> getPerson(@PathVariable String firstName, @PathVariable String lastName) {
+    @GetMapping("/person")
+    public Person getPersonByParam(@RequestParam String firstName, @RequestParam String lastName) {
      	
         return personService.getPerson(firstName, lastName);
     }
     
-
+    
+    
+    
 }
