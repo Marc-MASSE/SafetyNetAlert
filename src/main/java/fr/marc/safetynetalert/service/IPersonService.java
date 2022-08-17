@@ -4,11 +4,11 @@ import fr.marc.safetynetalert.model.Person;
 
 public interface IPersonService {
 	
-	Person getPerson(final String firstName, final String LastName);
+	Person getPerson(final String firstName, final String lastName);
 
 	Iterable<Person> getPersons();
 
-	void deletePerson(final String firstName, final String LastName);
+	void deletePerson(final String firstName, final String lastName);
 
 	Person savePerson(Person person);
 

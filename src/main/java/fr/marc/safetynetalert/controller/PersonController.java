@@ -1,6 +1,7 @@
 package fr.marc.safetynetalert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +35,11 @@ public class PersonController {
         return personService.getPerson(firstName, lastName);
     }
     
+    @DeleteMapping("/person")
+    public void deletePersonByParam(@RequestParam String firstName, @RequestParam String lastName) {
+     	
+        personService.deletePerson(firstName, lastName);
+    }
     
     
     
