@@ -8,7 +8,7 @@ import fr.marc.safetynetalert.model.Person;
 
 public interface IFireStationService {
 	
-	Optional<FireStation> getFireStationsByStation(final String station);
+	List<FireStation> getFireStationsByStation(final String station);
 	
 	FireStation getFireStationsByAddress(final String address);
 
@@ -18,6 +18,6 @@ public interface IFireStationService {
 	
 	void deleteFireStationsByAddress(final String address);
 
-	Person saveFireStation(FireStation fireStation);
+	FireStation saveFireStation(FireStation fireStation);
 
 }

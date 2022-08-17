@@ -20,11 +20,11 @@ public class FireStationServiceImpl implements IFireStationService {
 	JsonData jsonData;
 
 	@Override
-	public Optional<FireStation> getFireStationsByStation(String station) {
+	public List<FireStation> getFireStationsByStation(String station) {
 		
-		Optional<FireStation> firestationList = jsonData.getFireStations().stream().filter(f->
-		f.getStation().equals(station)).findAny();
-		return Optional.ofNullable(firestationList.orElse(null));
+		List<FireStation> firestationList = jsonData.getFireStations().stream().filter(f->
+		f.getStation().equals(station)).toList();
+		return firestationList;
 	}
 
 	@Override
@@ -52,9 +52,10 @@ public class FireStationServiceImpl implements IFireStationService {
 	}
 
 	@Override
-	public Person saveFireStation(FireStation fireStation) {
+	public FireStation saveFireStation(FireStation fireStation) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return fireStation;
 	}
 
 }

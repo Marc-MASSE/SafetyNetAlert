@@ -22,7 +22,7 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws IOException {
 		
-		// log.info("Initializing Database");
+		// Logger.info("Initializing Database");
 		jsonDataService.initialization();
 	
 	}

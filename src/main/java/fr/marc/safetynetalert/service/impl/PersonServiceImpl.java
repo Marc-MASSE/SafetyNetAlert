@@ -81,7 +81,8 @@ public class PersonServiceImpl implements IPersonService {
 	@Override
 	public Person savePerson(Person person) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return person;
 	}
 
 }
