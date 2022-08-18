@@ -22,8 +22,10 @@ public class FireStationServiceImpl implements IFireStationService {
 	@Override
 	public List<FireStation> getFireStationsByStation(String station) {
 		
-		List<FireStation> firestationList = jsonData.getFireStations().stream().filter(f->
-		f.getStation().equals(station)).toList();
+		List<FireStation> firestationList = jsonData.getFireStations()
+				.stream()
+				.filter(f-> f.getStation().equals(station))
+				.toList();
 		return firestationList;
 	}
 

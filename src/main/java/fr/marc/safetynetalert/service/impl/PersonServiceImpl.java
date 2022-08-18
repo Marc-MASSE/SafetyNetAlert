@@ -1,19 +1,15 @@
 package fr.marc.safetynetalert.service.impl;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import fr.marc.safetynetalert.model.FireStation;
 import fr.marc.safetynetalert.model.JsonData;
 import fr.marc.safetynetalert.model.Person;
-import fr.marc.safetynetalert.repository.Retrieval;
 import fr.marc.safetynetalert.service.IPersonService;
 
 /*
@@ -37,8 +33,11 @@ public class PersonServiceImpl implements IPersonService {
 	@Override
 	public Person getPerson(String firstName, String lastName) {
 
-		Optional<Person> matchingPerson = jsonData.getPersons().stream()
-				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).findFirst();
+		Optional<Person> matchingPerson = jsonData.getPersons()
+				.stream()
+				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName()
+				.equals(lastName))
+				.findFirst();
 		return matchingPerson.orElse(null);
 	}
 
@@ -55,26 +54,25 @@ public class PersonServiceImpl implements IPersonService {
 	public void deletePerson(String firstName, String lastName) {
 		// TODO Auto-generated method stub
 		
+		
+				
+		Optional<Person> matchingPerson = jsonData.getPersons()
+				.stream()
+				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
+				.findFirst();
+		if(matchingPerson.isPresent()) {
+			jsonData.getPersons().remove(matchingPerson.get());
+		}
+		
+		
+		
 		/*
-		List<Person> reducedPersonList = jsonData.getPersons();
-		
-		Optional<Person> matchingPerson = jsonData.getPersons().stream()
-				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).findFirst();
-		
-		if (reducedPersonList.remove(matchingPerson)) {
-			
-			jsonData.setPersons(reducedPersonList);
-		};
-		*/
-
-		
-		
 		jsonData.getPersons().forEach(p -> {
 			if (p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)) {
 				jsonData.getPersons().remove(p);
 			}
 		});
-		
+		*/
 		
 	}
 
@@ -83,6 +81,15 @@ public class PersonServiceImpl implements IPersonService {
 		// TODO Auto-generated method stub
 		
 		return person;
+	}
+
+	@Override
+	public List<Person> getPersonsByAddress(String address) {
+		// TODO Auto-generated method stub
+		List<Person> personList = jsonData.getPersons().stream().filter(p->
+		p.getAddress().equals(address)).toList();
+		
+		return personList;
 	}
 
 }
