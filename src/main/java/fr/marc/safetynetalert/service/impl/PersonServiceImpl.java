@@ -53,8 +53,6 @@ public class PersonServiceImpl implements IPersonService {
 	@Override
 	public void deletePerson(String firstName, String lastName) {
 		// TODO Auto-generated method stub
-		
-		
 				
 		Optional<Person> matchingPerson = jsonData.getPersons()
 				.stream()
@@ -64,8 +62,6 @@ public class PersonServiceImpl implements IPersonService {
 			jsonData.getPersons().remove(matchingPerson.get());
 		}
 		
-		
-		
 		/*
 		jsonData.getPersons().forEach(p -> {
 			if (p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)) {
@@ -73,12 +69,12 @@ public class PersonServiceImpl implements IPersonService {
 			}
 		});
 		*/
-		
 	}
 
 	@Override
 	public Person savePerson(Person person) {
 		// TODO Auto-generated method stub
+		jsonData.getPersons().add(person);
 		
 		return person;
 	}
