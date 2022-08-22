@@ -7,7 +7,7 @@ public interface IFireStationService {
 	
 	List<FireStation> getFireStationsByStation(final String station);
 	
-	FireStation getFireStationsByAddress(final String address);
+	FireStation getStationByAddress(final String address);
 
 	Iterable<FireStation> getFireStations();
 

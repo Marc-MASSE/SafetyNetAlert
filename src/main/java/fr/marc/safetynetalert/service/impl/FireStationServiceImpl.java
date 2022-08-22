@@ -8,12 +8,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.FireStation;
-import fr.marc.safetynetalert.model.JsonData;
 import fr.marc.safetynetalert.model.Person;
+import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IFireStationService;
 
 @Service
-@Component
 public class FireStationServiceImpl implements IFireStationService {
 	
 	@Autowired
@@ -30,9 +29,13 @@ public class FireStationServiceImpl implements IFireStationService {
 	}
 
 	@Override
-	public FireStation getFireStationsByAddress(String address) {
+	public FireStation getStationByAddress(String address) {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<FireStation> matchingStation = jsonData.getFireStations()
+				.stream()
+				.filter(f-> f.getAddress().equals(address))
+				.findFirst();
+		return matchingStation.orElse(null);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public interface IPersonService {
 	
 	Person getPerson(final String firstName, final String lastName);
 
-	Iterable<Person> getPersons();
+	List<Person> getPersons();
 	
 	List<Person> getPersonsByAddress(final String address);
 
@@ -16,5 +16,8 @@ public interface IPersonService {
 
 	Person savePerson(Person person);
 
+	Person updatePerson(String firstName, String lastName, Person person);
+
+	List<String> getEmailByCity(String city);
 
 }

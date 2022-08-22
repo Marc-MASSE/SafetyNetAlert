@@ -1,16 +1,16 @@
 package fr.marc.safetynetalert.model;
 
-public class PersonDataForFireStation {
+public class FireStationAlertPerson {
 	
 	private String firstName;
 	private String lastName;
 	private String address;
 	private String phone;
 	
-	public PersonDataForFireStation() {
+	public FireStationAlertPerson() {
 	}
 
-	public PersonDataForFireStation(String firstName, String lastName, String address, String phone) {
+	public FireStationAlertPerson(String firstName, String lastName, String address, String phone) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;

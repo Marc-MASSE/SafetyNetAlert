@@ -1,8 +1,12 @@
-package fr.marc.safetynetalert.model;
+package fr.marc.safetynetalert.repository;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import fr.marc.safetynetalert.model.FireStation;
+import fr.marc.safetynetalert.model.MedicalRecord;
+import fr.marc.safetynetalert.model.Person;
 
 @Component
 public class JsonData {
