@@ -7,8 +7,10 @@ public class Child {
 	private int age;
 	
 	
+	public Child() {
+	}
+	
 	public Child(String firstName, String lastName, int age) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;

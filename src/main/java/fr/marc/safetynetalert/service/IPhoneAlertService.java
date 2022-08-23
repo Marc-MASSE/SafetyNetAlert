@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IPhoneAlertService {
 	
-	List<String> getPhoneAlertList (final String station);
+	List<String> getPhoneAlertList (final String firestation);
 
 }

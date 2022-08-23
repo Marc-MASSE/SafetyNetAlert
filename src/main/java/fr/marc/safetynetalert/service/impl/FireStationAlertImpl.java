@@ -20,17 +20,13 @@ public class FireStationAlertImpl implements IFireStationAlertService {
 
 	private int childNumber;
 	private int adultNumber;
-	// private List<ConcatenatedFormat> matchingList;
-	
-	// private List<ConcatenatedFormat> completeList;
 
 	/*
-	 * @return a data list that contains FirstName, LastName, Address, Phone, StationNumber (the station on which this person depends) and the person's Age
+	 * @return a data list that contains FirstName, LastName, Address, Phone, 
+	 * StationNumber (the station on which this person depends) and the person's Age
 	 */
-	
 	@Override
 	public FireStationAlert getFireStationsAlert(String station) {
-		// TODO Auto-generated method stub
 		
 		FireStationAlert fireStationAlert = new FireStationAlert();
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();

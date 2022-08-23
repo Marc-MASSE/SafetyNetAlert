@@ -16,7 +16,7 @@ public class FireAlertController {
 	@Autowired
 	IFireAlertService fireAlertService;
 	
-	@GetMapping
+	@GetMapping("/fire")
 	public List<FireAlert> getFireAlertData (@RequestParam String address){
 		
 		return fireAlertService.getFireAlertList(address);

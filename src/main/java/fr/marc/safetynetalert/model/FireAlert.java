@@ -10,27 +10,21 @@ public class FireAlert {
 	private int age;
 	private List<String> medications;
 	private List<String> allergies;
+	private String stationNumber;
 	
 	
-	public FireAlert(String lastName, String firstName, String phone, int age, List<String> medications,
-			List<String> allergies) {
-		super();
-		this.lastName = lastName;
+	public FireAlert() {
+	}
+	
+	public FireAlert(String firstName, String lastName, String phone, int age, List<String> medications,
+			List<String> allergies, String stationNumber) {
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.phone = phone;
 		this.age = age;
 		this.medications = medications;
 		this.allergies = allergies;
-	}
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.stationNumber = stationNumber;
 	}
 
 
@@ -41,6 +35,16 @@ public class FireAlert {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 
@@ -82,7 +86,15 @@ public class FireAlert {
 	public void setAllergies(List<String> allergies) {
 		this.allergies = allergies;
 	}
-	
-	
 
+
+	public String getStationNumber() {
+		return stationNumber;
+	}
+
+
+	public void setStationNumber(String stationNumber) {
+		this.stationNumber = stationNumber;
+	}
+	
 }

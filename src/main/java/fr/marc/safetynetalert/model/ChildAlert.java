@@ -5,11 +5,13 @@ import java.util.List;
 public class ChildAlert {
 	
 	private List<Child> child;
-	private List<Person> otherMember;
+	private List<Child> otherMember;
 	
+
+	public ChildAlert() {
+	}
 	
-	public ChildAlert(List<Child> child, List<Person> otherMember) {
-		super();
+	public ChildAlert(List<Child> child, List<Child> otherMember) {
 		this.child = child;
 		this.otherMember = otherMember;
 	}
@@ -25,12 +27,12 @@ public class ChildAlert {
 	}
 
 
-	public List<Person> getOtherMember() {
+	public List<Child> getOtherMember() {
 		return otherMember;
 	}
 
 
-	public void setOtherMember(List<Person> otherMember) {
+	public void setOtherMember(List<Child> otherMember) {
 		this.otherMember = otherMember;
 	}
 	

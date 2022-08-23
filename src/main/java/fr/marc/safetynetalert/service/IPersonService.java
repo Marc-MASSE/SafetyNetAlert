@@ -14,10 +14,10 @@ public interface IPersonService {
 
 	void deletePerson(final String firstName, final String lastName);
 
-	Person savePerson(Person person);
+	Person savePerson(final Person person);
 
-	Person updatePerson(String firstName, String lastName, Person person);
+	Person updatePerson(final String firstName, final String lastName, final Person person);
 
-	List<String> getEmailByCity(String city);
+	List<String> getEmailByCity(final String city);
 
 }

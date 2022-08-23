@@ -15,10 +15,10 @@ public class PhoneAlertController {
 	@Autowired
 	IPhoneAlertService phoneAlertService;
 	
-	@GetMapping("/fire")
-	public List<String> getPhoneAlertData (@RequestParam String address){
+	@GetMapping("/phoneAlert")
+	public List<String> getPhoneAlertData (@RequestParam String firestation){
 		
-		return phoneAlertService.getPhoneAlertList(address);
+		return phoneAlertService.getPhoneAlertList(firestation);
 	};
 
 }

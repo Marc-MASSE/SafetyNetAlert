@@ -54,8 +54,8 @@ public class PersonController {
     }
     
     @PostMapping(value = "/person")
-    public void addPerson(@RequestBody Person person) {
-      personService.savePerson(person);
+    public Person addPerson(@RequestBody Person person) {
+    	return personService.savePerson(person);
     }
     
     @PutMapping(value = "/person")
