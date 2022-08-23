@@ -14,9 +14,11 @@ public class FloodAlert {
 	private List<String> allergies;
 	
 	
+	public FloodAlert() {
+	}
+	
 	public FloodAlert(String stationNumber, String address, String firstName, String lastName, String phone, int age,
 			List<String> medications, List<String> allergies) {
-		super();
 		this.stationNumber = stationNumber;
 		this.address = address;
 		this.firstName = firstName;

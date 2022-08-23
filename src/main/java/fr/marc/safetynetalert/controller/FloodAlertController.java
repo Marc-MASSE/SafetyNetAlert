@@ -13,8 +13,6 @@ import fr.marc.safetynetalert.service.IFloodAlertService;
 @RestController
 public class FloodAlertController {
 	
-	
-	/*
 	@Autowired
 	IFloodAlertService floodAlertService;
 	
@@ -24,6 +22,5 @@ public class FloodAlertController {
 		return floodAlertService.getFloodAlertList(stations);
 		
 	}
-	*/
 
 }

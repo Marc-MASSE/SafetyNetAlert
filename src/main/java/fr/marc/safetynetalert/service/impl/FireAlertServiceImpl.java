@@ -19,7 +19,6 @@ public class FireAlertServiceImpl implements IFireAlertService {
 
 	@Override
 	public List<FireAlert> getFireAlertList(String address) {
-		// TODO Auto-generated method stub
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<FireAlert> fireAlertList = new ArrayList<>();

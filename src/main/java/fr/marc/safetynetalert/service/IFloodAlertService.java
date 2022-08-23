@@ -6,8 +6,8 @@ import fr.marc.safetynetalert.model.FloodAlert;
 
 public interface IFloodAlertService {
 	
-	/*
-	List<FloodAlert> getFloodAlertList(List<String> stations);
-	*/
+	
+	List<FloodAlert> getFloodAlertList(final List<String> stationList);
+	
 
 }

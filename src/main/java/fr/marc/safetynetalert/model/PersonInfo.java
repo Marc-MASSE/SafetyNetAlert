@@ -13,9 +13,12 @@ public class PersonInfo {
 	private List<String> allergies;
 	
 	
+	public PersonInfo() {
+		super();
+	}
+	
 	public PersonInfo(String firstName, String lastName, String address, int age, String email,
 			List<String> medications, List<String> allergies) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
