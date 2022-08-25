@@ -35,6 +35,8 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 	@Override
 	public MedicalRecord saveMedicalRecord(MedicalRecord medicalRecord) {
 		
+		jsonData.getMedicalRecords().add(medicalRecord);
+		
 		return medicalRecord;
 	}
 
@@ -58,6 +60,25 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 				.findFirst();
 	
 		return ageCalculator.getAge(matchingMedicalRecord.get().getBirthdate().toString(),date);
+	}
+
+	@Override
+	public MedicalRecord updateMedicalRecord(String firstName, String lastName, MedicalRecord medicalRecord) {
+		// TODO Auto-generated method stub
+		
+		Optional<MedicalRecord> matchingMedicalRecord = jsonData.getMedicalRecords()
+				.stream()
+				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
+				.findFirst();
+		if (matchingMedicalRecord.isPresent()) {
+			matchingMedicalRecord.get().setBirthdate(medicalRecord.getBirthdate());
+			matchingMedicalRecord.get().setMedications(medicalRecord.getMedications());
+			matchingMedicalRecord.get().setAllergies(medicalRecord.getAllergies());
+			
+			return matchingMedicalRecord.get();
+		}
+		
+		return null;
 	}
 	
 

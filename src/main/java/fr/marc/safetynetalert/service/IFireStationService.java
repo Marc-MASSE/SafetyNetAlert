@@ -15,6 +15,8 @@ public interface IFireStationService {
 	
 	void deleteFireStationsByAddress(final String address);
 
-	FireStation saveFireStation(FireStation fireStation);
+	FireStation saveFireStation(final FireStation fireStation);
+	
+	FireStation updateFireStation(final String address, final FireStation fireStation);
 
 }

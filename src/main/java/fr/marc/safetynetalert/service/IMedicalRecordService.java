@@ -15,5 +15,7 @@ public interface IMedicalRecordService {
 	void deleteMedicalRecord(final String firstName, final String lastName);
 	
 	MedicalRecord saveMedicalRecord(final MedicalRecord medicalRecord);
+	
+	MedicalRecord updateMedicalRecord(final String firstName, final String lastName, final MedicalRecord medicalRecord);
 
 }

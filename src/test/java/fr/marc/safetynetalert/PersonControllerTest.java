@@ -1,4 +1,4 @@
-package fr.marc.safetynetalert.controller;
+package fr.marc.safetynetalert;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import fr.marc.safetynetalert.controller.PersonController;
+import fr.marc.safetynetalert.service.IPersonService;
 import fr.marc.safetynetalert.service.impl.PersonServiceImpl;
 
 @WebMvcTest(controllers = PersonController.class)

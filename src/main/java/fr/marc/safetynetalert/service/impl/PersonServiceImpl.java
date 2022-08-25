@@ -24,7 +24,7 @@ public class PersonServiceImpl implements IPersonService {
 	JsonData jsonData;
 
 	/*
-	 * @return - a single person according to his firstName and lastName
+	 * @return A single person according to his firstName and lastName
 	 */
 	@Override
 	public Person getPerson(String firstName, String lastName) {
@@ -67,6 +67,7 @@ public class PersonServiceImpl implements IPersonService {
 		return person;
 	}
 
+	/*
 	@Override
 	public List<Person> getPersonsByAddress(String address) {
 		// TODO Auto-generated method stub
@@ -77,10 +78,11 @@ public class PersonServiceImpl implements IPersonService {
 
 		return personList;
 	}
+	*/
 	
 	@Override
 	public List<String> getEmailByCity(String city) {
-		// TODO Auto-generated method stub
+		
 		List<String> emailList = new ArrayList<>();
 		
 		List<Person> personList = jsonData.getPersons()
@@ -102,6 +104,10 @@ public class PersonServiceImpl implements IPersonService {
 				.findFirst();
 		if (matchingPerson.isPresent()) {
 			matchingPerson.get().setAddress(person.getAddress());
+			matchingPerson.get().setCity(person.getCity());
+			matchingPerson.get().setZip(person.getZip());
+			matchingPerson.get().setPhone(person.getPhone());
+			matchingPerson.get().setEmail(person.getEmail());
 			
 			return matchingPerson.get();
 		}

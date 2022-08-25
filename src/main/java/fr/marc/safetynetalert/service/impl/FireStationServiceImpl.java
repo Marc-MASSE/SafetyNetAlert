@@ -59,8 +59,26 @@ public class FireStationServiceImpl implements IFireStationService {
 	@Override
 	public FireStation saveFireStation(FireStation fireStation) {
 		// TODO Auto-generated method stub
+		jsonData.getFireStations().add(fireStation);
 		
 		return fireStation;
+	}
+
+	@Override
+	public FireStation updateFireStation(String address, FireStation fireStation) {
+		// TODO Auto-generated method stub
+		
+		Optional<FireStation> matchingFireStation = jsonData.getFireStations()
+				.stream()
+				.filter(f -> f.getAddress().equals(address))
+				.findFirst();
+		if (matchingFireStation.isPresent()) {
+			matchingFireStation.get().setStation(fireStation.getStation());
+			
+			return matchingFireStation.get();
+		}
+		
+		return null;
 	}
 
 }
