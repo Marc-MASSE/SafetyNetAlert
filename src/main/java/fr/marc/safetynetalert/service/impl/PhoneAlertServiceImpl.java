@@ -13,16 +13,16 @@ import fr.marc.safetynetalert.service.IPhoneAlertService;
 @Service
 public class PhoneAlertServiceImpl implements IPhoneAlertService {
 	
-	@Autowired
-	private DataForRequest dataForRequest;
+	//@Autowired
+	//private DataForRequest dataForRequest;
 
 	@Override
-	public List<String> getPhoneAlertList(String firestation) {
+	public List<String> getPhoneAlertList(String firestation, List<ConcatenatedFormat> dataList) {
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<String> phoneList = new ArrayList<>();
 		
-		matchingList = dataForRequest.getData()
+		matchingList = dataList
 				.stream()
 				.filter(f-> f.getStationNumber().toString().equals(firestation))
 				.toList();

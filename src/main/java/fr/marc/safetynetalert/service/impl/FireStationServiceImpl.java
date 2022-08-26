@@ -35,7 +35,7 @@ public class FireStationServiceImpl implements IFireStationService {
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
 				.findFirst();
-		return matchingStation.orElse(null);
+		return matchingStation.orElse(new FireStation());
 	}
 
 	@Override

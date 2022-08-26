@@ -48,23 +48,36 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
 				.findFirst();
 		
-		return matchingMedicalRecord.orElse(null);
+		return matchingMedicalRecord.orElse(new MedicalRecord());
 	}
 
+	/*
+	 * Calculates the age of a person identified by their first name and last name on the given date.
+	 * @return the person's age or -1 if the birth date does'nt exist
+	 */
+		
 	@Override
 	public int getPersonsAge(String firstName, String lastName, LocalDate date) {
 		
-		Optional<MedicalRecord> matchingMedicalRecord = jsonData.getMedicalRecords()
+		int age;
+		
+		MedicalRecord matchingMedicalRecord = jsonData.getMedicalRecords()
 				.stream()
 				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
-				.findFirst();
-	
-		return ageCalculator.getAge(matchingMedicalRecord.get().getBirthdate().toString(),date);
+				.findFirst()
+				.orElse(new MedicalRecord());
+		
+		try {
+			age = ageCalculator.getAge(matchingMedicalRecord.getBirthdate().toString(),date);
+		}
+		catch (Exception e) {
+			age =-1;
+		}
+		return age;
 	}
 
 	@Override
 	public MedicalRecord updateMedicalRecord(String firstName, String lastName, MedicalRecord medicalRecord) {
-		// TODO Auto-generated method stub
 		
 		Optional<MedicalRecord> matchingMedicalRecord = jsonData.getMedicalRecords()
 				.stream()
@@ -77,9 +90,7 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 			
 			return matchingMedicalRecord.get();
 		}
-		
 		return null;
 	}
-	
 
 }

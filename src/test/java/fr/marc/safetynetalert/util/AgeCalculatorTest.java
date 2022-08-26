@@ -11,7 +11,7 @@ public class AgeCalculatorTest {
 	private static AgeCalculator ageCalculator = new AgeCalculator();
 	
 	@Test
-	public void CalculatedAge_Should_Return_36() {
+	public void calculatedAge_Should_Return_36() {
 		
 		String birthDateStringFormat = "11/25/1966";
 		LocalDate currentDate = LocalDate.of(2003, 07, 19);
