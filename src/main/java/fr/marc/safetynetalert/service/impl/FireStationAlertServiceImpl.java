@@ -3,20 +3,18 @@ package fr.marc.safetynetalert.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.model.FireStationAlert;
 import fr.marc.safetynetalert.model.FireStationAlertPerson;
-import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFireStationAlertService;
 
 @Service
-public class FireStationAlertImpl implements IFireStationAlertService {
+public class FireStationAlertServiceImpl implements IFireStationAlertService {
 	
-	@Autowired
-	private DataForRequest dataForRequest;
+	//@Autowired
+	//private DataForRequest dataForRequest;
 
 	private int childNumber;
 	private int adultNumber;
@@ -26,13 +24,13 @@ public class FireStationAlertImpl implements IFireStationAlertService {
 	 * StationNumber (the station on which this person depends) and the person's Age
 	 */
 	@Override
-	public FireStationAlert getFireStationsAlert(String station) {
+	public FireStationAlert getFireStationsAlert(String station, List<ConcatenatedFormat> dataList) {
 		
 		FireStationAlert fireStationAlert = new FireStationAlert();
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<FireStationAlertPerson> fireStationAlertPersonList = new ArrayList<>();
 		
-		matchingList = dataForRequest.getData()
+		matchingList = dataList
 			.stream()
 			.filter(f-> f.getStationNumber().toString().equals(station))
 			.toList();

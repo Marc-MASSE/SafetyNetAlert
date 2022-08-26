@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.FireStationAlert;
+import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFireStationAlertService;
 
 @RestController
@@ -14,10 +15,13 @@ public class FireStationAlertController {
 	@Autowired
 	IFireStationAlertService fireStationAlertService;
 	
+	@Autowired
+	private DataForRequest dataForRequest;
+	
 	   @GetMapping("/firestation")
 	    public FireStationAlert getFireStationAlertData(@RequestParam String stationNumber) {
 	     	
-	        return fireStationAlertService.getFireStationsAlert(stationNumber);
+	        return fireStationAlertService.getFireStationsAlert(stationNumber, dataForRequest.getData());
 	    }
 	
 
