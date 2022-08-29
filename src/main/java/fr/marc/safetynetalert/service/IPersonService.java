@@ -10,8 +10,6 @@ public interface IPersonService {
 
 	List<Person> getPersons();
 	
-	// List<Person> getPersonsByAddress(final String address);
-
 	void deletePerson(final String firstName, final String lastName);
 
 	Person savePerson(final Person person);

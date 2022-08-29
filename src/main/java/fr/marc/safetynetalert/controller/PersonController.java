@@ -21,8 +21,7 @@ public class PersonController {
     IPersonService personService;
  
 	/**
-    * Read - Get all persons
-    * @return - An Iterable object of Person full filled
+    * @return - The entire person list in the database
     */
     @GetMapping("/persons")
     public List<Person> getPersons() {
@@ -31,7 +30,6 @@ public class PersonController {
     }
  
     /**
-    * Read - Get one person
     * @return - a single person according to his firstName and lastName
     */   
     @GetMapping("/person")

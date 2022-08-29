@@ -15,19 +15,18 @@ import fr.marc.safetynetalert.service.IChildAlertService;
 @Service
 public class ChildAlertServiceImpl implements IChildAlertService {
 	
-	@Autowired
-	private DataForRequest dataForRequest;
+	//@Autowired
+	//private DataForRequest dataForRequest;
 
 	@Override
-	public ChildAlert getChildAlertList(String address) {
-		// TODO Auto-generated method stub
+	public ChildAlert getChildAlertList(String address, List<ConcatenatedFormat> dataList) {
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<Child> childList = new ArrayList<>();
 		List<Child> adultList = new ArrayList<>();
 		ChildAlert childAlert = new ChildAlert();
 		
-		matchingList = dataForRequest.getData()
+		matchingList = dataList
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
 				.toList();
@@ -49,8 +48,11 @@ public class ChildAlertServiceImpl implements IChildAlertService {
 				childList.add(child);
 			}
 
-			childAlert.setChild(childList);
-			childAlert.setOtherMember(adultList);
+			// If there is no child at this address, this method return an empty list
+			if (!childList.isEmpty()) {
+				childAlert.setChild(childList);
+				childAlert.setOtherMember(adultList);
+			}
 		});
 		
 		return childAlert;

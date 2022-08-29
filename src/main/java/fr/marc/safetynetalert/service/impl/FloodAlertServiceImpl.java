@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.model.FloodAlert;
+import fr.marc.safetynetalert.model.FloodAlertPerStation;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFloodAlertService;
 
@@ -15,11 +16,11 @@ import fr.marc.safetynetalert.service.IFloodAlertService;
 public class FloodAlertServiceImpl implements IFloodAlertService {
 	
 	
-	@Autowired
-	private DataForRequest dataForRequest;
+	//@Autowired
+	//private DataForRequest dataForRequest;
 
 	@Override
-	public List<FloodAlert> getFloodAlertList(List<String> stationList) {
+	public List<FloodAlert> getFloodAlertList(List<String> stationList, List<ConcatenatedFormat> dataList) {
 		// TODO Auto-generated method stub
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
@@ -27,32 +28,52 @@ public class FloodAlertServiceImpl implements IFloodAlertService {
 		
 		stationList.forEach(s -> {
 			
-			List<ConcatenatedFormat> matchingListPart = new ArrayList<>();
-			
-			matchingListPart = dataForRequest.getData()
-				.stream()
-				.filter(f->f.getStationNumber().equals(s))
-				.toList();
-			
-			matchingList.addAll(matchingListPart);
-			
-			});
-		
-		matchingList.forEach(m -> {
-		
 			FloodAlert floodAlert = new FloodAlert();
-			
-			floodAlert.setStationNumber(m.getStationNumber());
-			floodAlert.setAddress(m.getAddress());
-			floodAlert.setFirstName(m.getFirstName());
-			floodAlert.setLastName(m.getLastName());
-			floodAlert.setPhone(m.getPhone());
-			floodAlert.setAge(m.getAge());
-			floodAlert.setMedications(m.getMedications());
-			floodAlert.setAllergies(m.getAllergies());
+			floodAlert.setStationNumber(s);
+			floodAlert.setFloodAlertPerStation(new ArrayList<FloodAlertPerStation>());
 			
 			floodAlertList.add(floodAlert);
+			
+			
+			//List<ConcatenatedFormat> matchingListPart = new ArrayList<>();
+			
+			//matchingListPart = dataList
+			//	.stream()
+			//	.filter(f->f.getStationNumber().equals(s))
+			//	.toList();
+			
+			//matchingList.addAll(matchingListPart);
+			
+			});
+			 
+		
+		dataList.forEach(d -> {
+			
+			floodAlertList.forEach(f -> {
+			
+				if (f.getStationNumber().equals(d.getStationNumber())) {
+			
+					FloodAlertPerStation floodAlertPerStation = new FloodAlertPerStation();
+
+					floodAlertPerStation.setAddress(d.getAddress());
+					floodAlertPerStation.setFirstName(d.getFirstName());
+					floodAlertPerStation.setLastName(d.getLastName());
+					floodAlertPerStation.setPhone(d.getPhone());
+					floodAlertPerStation.setAge(d.getAge());
+					floodAlertPerStation.setMedications(d.getMedications());
+					floodAlertPerStation.setAllergies(d.getAllergies());
+					
+					f.getFloodAlertPerStation().add(floodAlertPerStation);
+				}
+			});
+			
+			
+			
 		});
+		
+
+			
+			//floodAlertList.add(floodAlert);
 		
 		return floodAlertList;
 	}

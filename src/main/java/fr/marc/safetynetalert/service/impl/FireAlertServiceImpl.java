@@ -14,16 +14,16 @@ import fr.marc.safetynetalert.service.IFireAlertService;
 @Service
 public class FireAlertServiceImpl implements IFireAlertService {
 	
-	@Autowired
-	private DataForRequest dataForRequest;
+	//@Autowired
+	//private DataForRequest dataForRequest;
 
 	@Override
-	public List<FireAlert> getFireAlertList(String address) {
+	public List<FireAlert> getFireAlertList(String address, List<ConcatenatedFormat> dataList) {
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<FireAlert> fireAlertList = new ArrayList<>();
 		
-		matchingList = dataForRequest.getData()
+		matchingList = dataList
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
 				.toList();

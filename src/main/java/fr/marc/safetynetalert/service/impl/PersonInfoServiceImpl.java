@@ -15,17 +15,17 @@ import fr.marc.safetynetalert.service.IPersonInfoService;
 @Service
 public class PersonInfoServiceImpl implements IPersonInfoService {
 	
-	@Autowired
-	private DataForRequest dataForRequest;
+	//@Autowired
+	//private DataForRequest dataForRequest;
 
 	@Override
-	public List<PersonInfo> getPersonInfoList(String firstName, String lastName) {
+	public List<PersonInfo> getPersonInfoList(String firstName, String lastName, List<ConcatenatedFormat> dataList) {
 		// TODO Auto-generated method stub
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<PersonInfo> personInfoList = new ArrayList<>();
 		
-		matchingList = dataForRequest.getData()
+		matchingList = dataList
 				.stream()
 				.filter(f-> f.getFirstName().equals(firstName) && f.getLastName().equals(lastName))
 				.toList();

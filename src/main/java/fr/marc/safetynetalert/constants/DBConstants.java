@@ -12,8 +12,9 @@ public class DBConstants {
 	static ConcatenatedFormat concat4 = new ConcatenatedFormat("Ric","Bald","4 rue de Framboisy","12-34-56-78-45","ric@email.com","3",12,List.of(""),List.of(""));
 	static ConcatenatedFormat concat5 = new ConcatenatedFormat("Nery","Bald","4 rue de Framboisy","12-34-56-78-45","nery@email.com","3",25,List.of(""),List.of(""));
 	static ConcatenatedFormat concat6 = new ConcatenatedFormat("Arthur","Bald","4 rue de Framboisy","12-34-56-78-45","art@email.com","3",27,List.of(""),List.of(""));
+	static ConcatenatedFormat concat7 = new ConcatenatedFormat("Mel","Mandinos","7 rue de Framboisy","12-34-56-78-97","bardesenior@email.com","2",72,List.of("Doliprane : 500mg"),List.of("Retirement"));
 	
-	public static final List<ConcatenatedFormat> DATABASE_TEST = List.of(concat1,concat2,concat3,concat4,concat5,concat6);
+	public static final List<ConcatenatedFormat> DATABASE_TEST = List.of(concat1,concat2,concat3,concat4,concat5,concat6,concat7);
 
 	public static final String PATH_TO_JSON_FILE = "src/main/resources/data.json";
 	
