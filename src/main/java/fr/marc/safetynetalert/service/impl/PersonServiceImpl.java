@@ -27,9 +27,9 @@ public class PersonServiceImpl implements IPersonService {
 	 * @return A single person according to his firstName and lastName
 	 */
 	@Override
-	public Person getPerson(String firstName, String lastName) {
+	public Person getPerson(String firstName, String lastName, List<Person> dataBase) {
 
-		Optional<Person> matchingPerson = jsonData.getPersons()
+		Optional<Person> matchingPerson = dataBase
 				.stream()
 				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
 				.findFirst();
@@ -40,52 +40,39 @@ public class PersonServiceImpl implements IPersonService {
 	 * @return the total persons list
 	 */
 	@Override
-	public List<Person> getPersons() {
+	public List<Person> getPersons(List<Person> dataBase) {
 
-		return jsonData.getPersons();
+		return dataBase;
 	}
 
 	@Override
-	public void deletePerson(String firstName, String lastName) {
+	public void deletePerson(String firstName, String lastName, List<Person> dataBase) {
 		// TODO Auto-generated method stub
 
-		Optional<Person> matchingPerson = jsonData.getPersons()
+		Optional<Person> matchingPerson = dataBase
 				.stream()
 				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
 				.findFirst();
 		if (matchingPerson.isPresent()) {
-			jsonData.getPersons().remove(matchingPerson.get());
+			dataBase.remove(matchingPerson.get());
 		}
 
 	}
 
 	@Override
-	public Person savePerson(Person person) {
+	public Person savePerson(Person person, List<Person> dataBase) {
 	
-		jsonData.getPersons().add(person);
+		dataBase.add(person);
 
 		return person;
 	}
 
-	/*
 	@Override
-	public List<Person> getPersonsByAddress(String address) {
-		// TODO Auto-generated method stub
-		List<Person> personList = jsonData.getPersons()
-				.stream()
-				.filter(p -> p.getAddress().equals(address))
-				.toList();
-
-		return personList;
-	}
-	*/
-	
-	@Override
-	public List<String> getEmailByCity(String city) {
+	public List<String> getEmailByCity(String city, List<Person> dataBase) {
 		
 		List<String> emailList = new ArrayList<>();
 		
-		List<Person> personList = jsonData.getPersons()
+		List<Person> personList = dataBase
 				.stream()
 				.filter(p -> p.getCity().equals(city))
 				.toList();
@@ -96,9 +83,9 @@ public class PersonServiceImpl implements IPersonService {
 	}
 
 	@Override
-	public Person updatePerson(String firstName, String lastName, Person person) {
+	public Person updatePerson(String firstName, String lastName, Person person, List<Person> dataBase) {
 
-		Optional<Person> matchingPerson = jsonData.getPersons()
+		Optional<Person> matchingPerson = dataBase
 				.stream()
 				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
 				.findFirst();

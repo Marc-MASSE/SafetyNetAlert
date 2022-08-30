@@ -19,9 +19,9 @@ public class FireStationServiceImpl implements IFireStationService {
 	JsonData jsonData;
 
 	@Override
-	public List<FireStation> getFireStationsByStation(String station) {
+	public List<FireStation> getFireStationsByStation(String station, List<FireStation> dataBase) {
 		
-		List<FireStation> firestationList = jsonData.getFireStations()
+		List<FireStation> firestationList = dataBase
 				.stream()
 				.filter(f-> f.getStation().equals(station))
 				.toList();
@@ -29,9 +29,9 @@ public class FireStationServiceImpl implements IFireStationService {
 	}
 
 	@Override
-	public FireStation getStationByAddress(String address) {
+	public FireStation getStationByAddress(String address, List<FireStation> dataBase) {
 		// TODO Auto-generated method stub
-		Optional<FireStation> matchingStation = jsonData.getFireStations()
+		Optional<FireStation> matchingStation = dataBase
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
 				.findFirst();
@@ -39,41 +39,41 @@ public class FireStationServiceImpl implements IFireStationService {
 	}
 
 	@Override
-	public Iterable<FireStation> getFireStations() {
+	public List<FireStation> getFireStations(List<FireStation> dataBase) {
 
-		return jsonData.getFireStations();
+		return dataBase;
 	}
 
 	@Override
-	public void deleteFireStationsByStation(String station) {
+	public void deleteFireStationsByStation(String station, List<FireStation> dataBase) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteFireStationsByAddress(String address) {
+	public void deleteFireStationsByAddress(String address, List<FireStation> dataBase) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public FireStation saveFireStation(FireStation fireStation) {
+	public FireStation saveFireStation(FireStation fireStation, List<FireStation> dataBase) {
 		// TODO Auto-generated method stub
-		jsonData.getFireStations().add(fireStation);
+		dataBase.add(fireStation);
 		
 		return fireStation;
 	}
 
 	@Override
-	public FireStation updateFireStation(String address, FireStation fireStation) {
+	public FireStation updateFireStation(String address, String stationNumber, List<FireStation> dataBase) {
 		// TODO Auto-generated method stub
 		
-		Optional<FireStation> matchingFireStation = jsonData.getFireStations()
+		Optional<FireStation> matchingFireStation = dataBase
 				.stream()
 				.filter(f -> f.getAddress().equals(address))
 				.findFirst();
 		if (matchingFireStation.isPresent()) {
-			matchingFireStation.get().setStation(fireStation.getStation());
+			matchingFireStation.get().setStation(stationNumber);
 			
 			return matchingFireStation.get();
 		}

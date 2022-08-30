@@ -15,14 +15,17 @@ import fr.marc.safetynetalert.service.IPersonService;
 @Component
 public class DataForRequest {
 	
-	@Autowired
-	IPersonService personService;
+	//@Autowired
+	//IPersonService personService;
 	
 	@Autowired
 	IFireStationService stationService;
 	
 	@Autowired
 	IMedicalRecordService medicalRecordService;
+	
+	@Autowired
+	JsonData jsonData;
 	
 	private LocalDate now = LocalDate.now();
 	
@@ -31,7 +34,7 @@ public class DataForRequest {
 		
 		List<ConcatenatedFormat> dataList = new ArrayList<>();
 		
-		personService.getPersons().forEach(p -> {
+		jsonData.getPersons().forEach(p -> {
 			
 			ConcatenatedFormat data = new ConcatenatedFormat();
 			
@@ -40,7 +43,7 @@ public class DataForRequest {
 			data.setAddress(p.getAddress());
 			data.setPhone(p.getPhone());
 			data.setEmail(p.getEmail());
-			data.setStationNumber(stationService.getStationByAddress(p.getAddress()).getStation());
+			data.setStationNumber(stationService.getStationByAddress(p.getAddress(), jsonData.getFireStations()).getStation());
 			data.setAge(medicalRecordService.getPersonsAge(p.getFirstName(), p.getLastName(), now));
 			data.setMedications(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getMedications());
 			data.setAllergies(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getAllergies());

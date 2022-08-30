@@ -5,18 +5,18 @@ import fr.marc.safetynetalert.model.FireStation;
 
 public interface IFireStationService {
 	
-	List<FireStation> getFireStationsByStation(final String station);
+	List<FireStation> getFireStationsByStation(final String station, final List<FireStation> dataBase);
 	
-	FireStation getStationByAddress(final String address);
+	FireStation getStationByAddress(final String address, final List<FireStation> dataBase);
 
-	Iterable<FireStation> getFireStations();
+	List<FireStation> getFireStations(final List<FireStation> dataBase);
 
-	void deleteFireStationsByStation(final String station);
+	void deleteFireStationsByStation(final String station, final List<FireStation> dataBase);
 	
-	void deleteFireStationsByAddress(final String address);
+	void deleteFireStationsByAddress(final String address, final List<FireStation> dataBase);
 
-	FireStation saveFireStation(final FireStation fireStation);
+	FireStation saveFireStation(final FireStation fireStation, final List<FireStation> dataBase);
 	
-	FireStation updateFireStation(final String address, final FireStation fireStation);
+	FireStation updateFireStation(final String address, final String stationNumber, final List<FireStation> dataBase);
 
 }
