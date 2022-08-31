@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.FireStation;
-import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IFireStationService;
 
@@ -30,7 +28,7 @@ public class FireStationServiceImpl implements IFireStationService {
 
 	@Override
 	public FireStation getStationByAddress(String address, List<FireStation> dataBase) {
-		// TODO Auto-generated method stub
+		
 		Optional<FireStation> matchingStation = dataBase
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
@@ -46,19 +44,34 @@ public class FireStationServiceImpl implements IFireStationService {
 
 	@Override
 	public void deleteFireStationsByStation(String station, List<FireStation> dataBase) {
-		// TODO Auto-generated method stub
 		
+		List<FireStation> fireStationToDelete = dataBase
+				.stream()
+				.filter(f -> f.getStation().equals(station))
+				.toList();
+		
+		
+		fireStationToDelete.forEach(f -> {
+			dataBase.remove(f);
+			});
 	}
 
 	@Override
 	public void deleteFireStationsByAddress(String address, List<FireStation> dataBase) {
-		// TODO Auto-generated method stub
+		
+		Optional<FireStation> matchingFireStation = dataBase
+				.stream()
+				.filter(f -> f.getAddress().equals(address))
+				.findFirst();
+		if (matchingFireStation.isPresent()) {
+			dataBase.remove(matchingFireStation.get());
+		}
 		
 	}
 
 	@Override
 	public FireStation saveFireStation(FireStation fireStation, List<FireStation> dataBase) {
-		// TODO Auto-generated method stub
+		
 		dataBase.add(fireStation);
 		
 		return fireStation;
@@ -66,7 +79,6 @@ public class FireStationServiceImpl implements IFireStationService {
 
 	@Override
 	public FireStation updateFireStation(String address, String stationNumber, List<FireStation> dataBase) {
-		// TODO Auto-generated method stub
 		
 		Optional<FireStation> matchingFireStation = dataBase
 				.stream()

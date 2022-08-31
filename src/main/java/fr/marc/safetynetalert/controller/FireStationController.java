@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.FireStation;
-import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IFireStationService;
-import fr.marc.safetynetalert.service.impl.JsonDataService;
 
 @RestController
 public class FireStationController {
@@ -47,8 +45,8 @@ public class FireStationController {
     @DeleteMapping("/firestation")
     public void deleteFireStationByParam(@RequestParam String stationNumber, @RequestParam String address) {
      	
-        if (address.isBlank() && stationNumber.isBlank()) {
-        }else if (address.isBlank()) {
+        if (address.equals("") && stationNumber.equals("")) {
+        }else if (address.equals("")) {
          	fireStationService.deleteFireStationsByStation(stationNumber, jsonData.getFireStations());
         }else {
         	fireStationService.deleteFireStationsByAddress(address, jsonData.getFireStations());

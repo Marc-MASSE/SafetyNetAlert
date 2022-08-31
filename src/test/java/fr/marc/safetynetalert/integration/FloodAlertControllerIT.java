@@ -6,8 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,12 +23,11 @@ public class FloodAlertControllerIT {
         mockMvc.perform(get("/flood/stations?stations=1,2"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].stationNumber", is("1")))
-            .andExpect(jsonPath("$[0].firstName", is("Peter")))
-            .andExpect(jsonPath("$[0].lastName", is("Duncan")))
-            .andExpect(jsonPath("$[6].stationNumber", is("2")))
-            .andExpect(jsonPath("$[6].firstName", is("Jonanathan")))
-            .andExpect(jsonPath("$[6].lastName", is("Marrack")));
+            .andExpect(jsonPath("$[0].floodAlertPerStation[0].firstName", is("Peter")))
+            .andExpect(jsonPath("$[0].floodAlertPerStation[0].lastName", is("Duncan")))
+            .andExpect(jsonPath("$[1].stationNumber", is("2")))
+            .andExpect(jsonPath("$[1].floodAlertPerStation[0].firstName", is("Jonanathan")))
+            .andExpect(jsonPath("$[1].floodAlertPerStation[0].lastName", is("Marrack")));
     }
-
 
 }

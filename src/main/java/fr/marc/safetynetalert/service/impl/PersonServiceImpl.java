@@ -47,7 +47,6 @@ public class PersonServiceImpl implements IPersonService {
 
 	@Override
 	public void deletePerson(String firstName, String lastName, List<Person> dataBase) {
-		// TODO Auto-generated method stub
 
 		Optional<Person> matchingPerson = dataBase
 				.stream()
