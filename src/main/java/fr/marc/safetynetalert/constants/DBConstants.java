@@ -33,6 +33,7 @@ public class DBConstants {
 	public static Person personToAdd = new Person("Adeline","Plus","1 rue de Chanteloup","Limoges","87000","12-34-56-78-00","adplus@email.com");
 	
 	public static final List<Person> PERSON_DATA_TEST = List.of(person1,person2,person3,person4,person5,person6,person7);
+	//public static List<Person> PERSON_DATA_TEST = Arrays.asList(person1,person2,person3,person4,person5,person6,person7);
 	
 	public static FireStation fireStation1 = new FireStation("9 rue de Framboisy","1");
 	public static FireStation fireStation2 = new FireStation("11 rue de Framboisy","1");

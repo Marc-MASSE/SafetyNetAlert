@@ -17,20 +17,21 @@ import fr.marc.safetynetalert.service.IPersonService;
 
 @RestController
 public class PersonController {
-
-	@Autowired
-    IPersonService personService;
 	
-	@Autowired
-	JsonData jsonData;
- 
+    private IPersonService personService;
+    
+    @Autowired
+	public PersonController(IPersonService personService) {
+		this.personService = personService;
+	}
+	
 	/**
     * @return - The entire person list in the database
     */
     @GetMapping("/persons")
     public List<Person> getPersons() {
     	
-        return personService.getPersons(jsonData.getPersons());
+        return personService.getPersons();
     }
  
     /**
@@ -39,30 +40,30 @@ public class PersonController {
     @GetMapping("/person")
     public Person getPersonByParam(@RequestParam String firstName, @RequestParam String lastName) {
      	
-        return personService.getPerson(firstName, lastName, jsonData.getPersons());
+        return personService.getPerson(firstName, lastName);
     }
     
     @GetMapping("/communityEmail")
     public List<String> getEmailByCityData(@RequestParam String city) {
     	
-		return personService.getEmailByCity(city, jsonData.getPersons());
+		return personService.getEmailByCity(city);
 	}
     
     
     @DeleteMapping("/person")
     public void deletePersonByParam(@RequestParam String firstName, @RequestParam String lastName) {
      	
-        personService.deletePerson(firstName, lastName, jsonData.getPersons());
+        personService.deletePerson(firstName, lastName);
     }
     
     @PostMapping(value = "/person")
     public Person addPerson(@RequestBody Person person) {
-    	return personService.savePerson(person, jsonData.getPersons());
+    	return personService.savePerson(person);
     }
     
     @PutMapping(value = "/person")
     public Person updatePerson(@RequestParam String firstName, @RequestParam String lastName,@RequestBody Person person) {
-    	return personService.updatePerson(firstName, lastName, person, jsonData.getPersons());
+    	return personService.updatePerson(firstName, lastName, person);
       
     }
     

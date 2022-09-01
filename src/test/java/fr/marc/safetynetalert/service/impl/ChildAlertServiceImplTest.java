@@ -2,20 +2,34 @@ package fr.marc.safetynetalert.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.ChildAlert;
+import fr.marc.safetynetalert.repository.DataForRequest;
+
+import fr.marc.safetynetalert.service.IChildAlertService;
 
 public class ChildAlertServiceImplTest {
 	
-	ChildAlertServiceImpl childAlertServiceImpl = new ChildAlertServiceImpl();
+	private IChildAlertService childAlertService;
+	private DataForRequest dataForRequest;
+	
+	@BeforeEach
+	public void init() {
+		dataForRequest = new DataForRequest();
+		dataForRequest.getDataTest();
+		childAlertService = new ChildAlertServiceImpl(dataForRequest);
+	}	
 	
 	@Test
 	public void getChildAlertList_success () {
 		
 		// WHEN
-		final ChildAlert resultList = childAlertServiceImpl.getChildAlertList("4 rue de Framboisy",DBConstants.DATABASE_TEST);
+		final ChildAlert resultList = childAlertService.getChildAlertList("4 rue de Framboisy");
 
 		// THEN
 		assertThat(resultList.getChild())
@@ -29,7 +43,7 @@ public class ChildAlertServiceImplTest {
 	public void getPhoneAlertList_no_child () {
 		
 		// WHEN
-		final ChildAlert resultList = childAlertServiceImpl.getChildAlertList("9 rue de Framboisy",DBConstants.DATABASE_TEST);
+		final ChildAlert resultList = childAlertService.getChildAlertList("9 rue de Framboisy");
 
 		// THEN
 		assertThat(resultList.getChild()).isNull();
@@ -40,7 +54,7 @@ public class ChildAlertServiceImplTest {
 	public void getPhoneAlertList_no_answer () {
 		
 		// WHEN
-		final ChildAlert resultList = childAlertServiceImpl.getChildAlertList("chemin de traverse",DBConstants.DATABASE_TEST);
+		final ChildAlert resultList = childAlertService.getChildAlertList("chemin de traverse");
 
 		// THEN
 		assertThat(resultList.getChild()).isNull();

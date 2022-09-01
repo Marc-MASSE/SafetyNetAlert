@@ -89,74 +89,38 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Surfire plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.junit.platform</groupId>
-						<artifactId>junit-platform-surefire-provider</artifactId>
-						<version>1.2.0</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<excludes>
-						<exclude>**/*IT.java</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<phase>integration-test</phase>
-						<configuration>
-							<excludes>
-								<exclude>none</exclude>
-							</excludes>
-							<includes>
-								<include>**/*IT.java</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
-			
+
 			<!-- Jacoco plugin -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.8</version>
+				<version>0.8.5</version>
 				<executions>
 					<execution>
+						<id>jacoco-initialize</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>jacoco-report</id>
+						<id>jacoco-site</id>
 						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
-						<!-- Exclude classes not to be tested-->
-						<configuration>
-							<excludes>
-								<exclude>fr/marc/safetynetalert/constants/*</exclude>
-							</excludes>
-						</configuration>
-
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 	<!-- Surefire reporting -->
 	<reporting>
 		<plugins>
@@ -168,5 +132,6 @@
 		</plugins>
 
 	</reporting>
+	
 
 </project>

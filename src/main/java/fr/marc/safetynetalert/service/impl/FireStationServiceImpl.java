@@ -13,13 +13,17 @@ import fr.marc.safetynetalert.service.IFireStationService;
 @Service
 public class FireStationServiceImpl implements IFireStationService {
 	
+	private JsonData jsonData;
+	
 	@Autowired
-	JsonData jsonData;
+	public FireStationServiceImpl(JsonData jsonData) {
+		this.jsonData = jsonData;
+	}
 
 	@Override
-	public List<FireStation> getFireStationsByStation(String station, List<FireStation> dataBase) {
+	public List<FireStation> getFireStationsByStation(String station) {
 		
-		List<FireStation> firestationList = dataBase
+		List<FireStation> firestationList = jsonData.getFireStations()
 				.stream()
 				.filter(f-> f.getStation().equals(station))
 				.toList();
@@ -27,9 +31,9 @@ public class FireStationServiceImpl implements IFireStationService {
 	}
 
 	@Override
-	public FireStation getStationByAddress(String address, List<FireStation> dataBase) {
+	public FireStation getStationByAddress(String address) {
 		
-		Optional<FireStation> matchingStation = dataBase
+		Optional<FireStation> matchingStation = jsonData.getFireStations()
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
 				.findFirst();
@@ -37,50 +41,50 @@ public class FireStationServiceImpl implements IFireStationService {
 	}
 
 	@Override
-	public List<FireStation> getFireStations(List<FireStation> dataBase) {
+	public List<FireStation> getFireStations() {
 
-		return dataBase;
+		return jsonData.getFireStations();
 	}
 
 	@Override
-	public void deleteFireStationsByStation(String station, List<FireStation> dataBase) {
+	public void deleteFireStationsByStation(String station) {
 		
-		List<FireStation> fireStationToDelete = dataBase
+		List<FireStation> fireStationToDelete = jsonData.getFireStations()
 				.stream()
 				.filter(f -> f.getStation().equals(station))
 				.toList();
 		
 		
 		fireStationToDelete.forEach(f -> {
-			dataBase.remove(f);
+			jsonData.getFireStations().remove(f);
 			});
 	}
 
 	@Override
-	public void deleteFireStationsByAddress(String address, List<FireStation> dataBase) {
+	public void deleteFireStationsByAddress(String address) {
 		
-		Optional<FireStation> matchingFireStation = dataBase
+		Optional<FireStation> matchingFireStation = jsonData.getFireStations()
 				.stream()
 				.filter(f -> f.getAddress().equals(address))
 				.findFirst();
 		if (matchingFireStation.isPresent()) {
-			dataBase.remove(matchingFireStation.get());
+			jsonData.getFireStations().remove(matchingFireStation.get());
 		}
 		
 	}
 
 	@Override
-	public FireStation saveFireStation(FireStation fireStation, List<FireStation> dataBase) {
+	public FireStation saveFireStation(FireStation fireStation) {
 		
-		dataBase.add(fireStation);
+		jsonData.getFireStations().add(fireStation);
 		
 		return fireStation;
 	}
 
 	@Override
-	public FireStation updateFireStation(String address, String stationNumber, List<FireStation> dataBase) {
+	public FireStation updateFireStation(String address, String stationNumber) {
 		
-		Optional<FireStation> matchingFireStation = dataBase
+		Optional<FireStation> matchingFireStation = jsonData.getFireStations()
 				.stream()
 				.filter(f -> f.getAddress().equals(address))
 				.findFirst();

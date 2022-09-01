@@ -21,10 +21,17 @@ public class PhoneAlertControllerIT {
 	private MockMvc mockMvc;
 	
 	@Test
-    public void GetPhoneAlertData() throws Exception {
+    public void getPhoneAlertData_success() throws Exception {
         mockMvc.perform(get("/phoneAlert?firestation=1"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0]", is("841-874-6512")));
+    }
+	
+	@Test
+    public void getPhoneAlertData_no_answer() throws Exception {
+        mockMvc.perform(get("/phoneAlert?firestation=5"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0]").doesNotExist());
     }
 
 }

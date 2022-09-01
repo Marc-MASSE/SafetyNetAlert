@@ -19,7 +19,7 @@ public class FloodAlertControllerIT {
 	private MockMvc mockMvc;
 	
 	@Test
-    public void GetFloodAlertData() throws Exception {
+    public void getFloodAlertData_success() throws Exception {
         mockMvc.perform(get("/flood/stations?stations=1,2"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].stationNumber", is("1")))
@@ -30,4 +30,12 @@ public class FloodAlertControllerIT {
             .andExpect(jsonPath("$[1].floodAlertPerStation[0].lastName", is("Marrack")));
     }
 
+	@Test
+    public void getFloodAlertData_no_answer() throws Exception {
+        mockMvc.perform(get("/flood/stations?stations=5"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].stationNumber", is("5")))
+            .andExpect(jsonPath("$[0].floodAlertPerStation[0]").doesNotExist());
+    }
+	
 }

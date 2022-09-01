@@ -21,7 +21,7 @@ public class PersonInfoControllerIT {
 	private MockMvc mockMvc;
 	
 	@Test
-    public void GetPersonInfoData() throws Exception {
+    public void getPersonInfoData_success() throws Exception {
         mockMvc.perform(get("/personInfo?firstName=Eric&lastName=Cadigan"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].firstName", is("Eric")))
@@ -33,4 +33,10 @@ public class PersonInfoControllerIT {
             .andExpect(jsonPath("$[0].allergies[0]").doesNotExist());
     }
 
+	@Test
+    public void getPersonInfoData_no_answer() throws Exception {
+        mockMvc.perform(get("/personInfo?firstName=Nemo&lastName=Personne"))
+            .andExpect(jsonPath("$[0]").doesNotExist());
+    }
+	
 }

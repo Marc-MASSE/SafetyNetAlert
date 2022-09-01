@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.FireStation;
-import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IFireStationService;
 
 @RestController
 public class FireStationController {
 
-	@Autowired
-	IFireStationService fireStationService;
+	private IFireStationService fireStationService;
 	
 	@Autowired
-	JsonData jsonData;
+	public FireStationController(IFireStationService fireStationService) {
+		this.fireStationService = fireStationService;
+	}
 
 	/**
 	 * Read - Get all persons
@@ -31,14 +31,14 @@ public class FireStationController {
 	@GetMapping("/firestations")
 	public Iterable<FireStation> getFireStations() {
 
-		return fireStationService.getFireStations(jsonData.getFireStations());
+		return fireStationService.getFireStations();
 	}
 	
 	
     @GetMapping("/firestationByStation")
     public List<FireStation> getFireStationsByStationParam(@RequestParam String station) {
      	
-        return fireStationService.getFireStationsByStation(station, jsonData.getFireStations());
+        return fireStationService.getFireStationsByStation(station);
     }
 	
     
@@ -47,20 +47,20 @@ public class FireStationController {
      	
         if (address.equals("") && stationNumber.equals("")) {
         }else if (address.equals("")) {
-         	fireStationService.deleteFireStationsByStation(stationNumber, jsonData.getFireStations());
+         	fireStationService.deleteFireStationsByStation(stationNumber);
         }else {
-        	fireStationService.deleteFireStationsByAddress(address, jsonData.getFireStations());
+        	fireStationService.deleteFireStationsByAddress(address);
         }
     }
     
     @PostMapping(value = "/firestation")
     public FireStation addFireStation(@RequestBody FireStation fireStation) {
-    	return fireStationService.saveFireStation(fireStation, jsonData.getFireStations());
+    	return fireStationService.saveFireStation(fireStation);
     }
     
     @PutMapping(value = "/firestation")
     public FireStation updateFireStation(@RequestParam String address,@RequestBody String stationNumber) {
-    	return fireStationService.updateFireStation(address, stationNumber, jsonData.getFireStations());
+    	return fireStationService.updateFireStation(address, stationNumber);
       
     }
     

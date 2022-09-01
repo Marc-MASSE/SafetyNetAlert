@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.service.IFireStationService;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
@@ -39,15 +40,21 @@ public class DataForRequest {
 			data.setAddress(p.getAddress());
 			data.setPhone(p.getPhone());
 			data.setEmail(p.getEmail());
-			data.setStationNumber(stationService.getStationByAddress(p.getAddress(), jsonData.getFireStations()).getStation());
-			data.setAge(medicalRecordService.getPersonsAge(p.getFirstName(), p.getLastName(), now, jsonData.getMedicalRecords()));
-			data.setMedications(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName(), jsonData.getMedicalRecords()).getMedications());
-			data.setAllergies(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName(), jsonData.getMedicalRecords()).getAllergies());
+			data.setStationNumber(stationService.getStationByAddress(p.getAddress()).getStation());
+			data.setAge(medicalRecordService.getPersonsAge(p.getFirstName(), p.getLastName(), now));
+			data.setMedications(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getMedications());
+			data.setAllergies(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getAllergies());
 			
 			dataList.add(data);
 		});
 		
 		return dataList;
 	}
+	
+	public List<ConcatenatedFormat> getDataTest() {
+		
+		return DBConstants.DATABASE_TEST;
+	}
+	
 	
 }

@@ -15,16 +15,20 @@ import fr.marc.safetynetalert.service.IPersonService;
 @Service
 public class PersonServiceImpl implements IPersonService {
 
-	@Autowired
-	JsonData jsonData;
+	private JsonData jsonData;
 
+	@Autowired
+	public PersonServiceImpl(JsonData jsonData) {
+		this.jsonData = jsonData;
+	}
+	
 	/*
 	 * @return A single person according to his firstName and lastName
 	 */
 	@Override
-	public Person getPerson(String firstName, String lastName, List<Person> dataBase) {
+	public Person getPerson(String firstName, String lastName) {
 
-		Optional<Person> matchingPerson = dataBase
+		Optional<Person> matchingPerson = jsonData.getPersons()
 				.stream()
 				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
 				.findFirst();
@@ -35,38 +39,38 @@ public class PersonServiceImpl implements IPersonService {
 	 * @return the total persons list
 	 */
 	@Override
-	public List<Person> getPersons(List<Person> dataBase) {
+	public List<Person> getPersons() {
 
-		return dataBase;
+		return jsonData.getPersons();
 	}
 
 	@Override
-	public void deletePerson(String firstName, String lastName, List<Person> dataBase) {
+	public void deletePerson(String firstName, String lastName) {
 
-		Optional<Person> matchingPerson = dataBase
+		Optional<Person> matchingPerson = jsonData.getPersons()
 				.stream()
 				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
 				.findFirst();
 		if (matchingPerson.isPresent()) {
-			dataBase.remove(matchingPerson.get());
+			jsonData.getPersons().remove(matchingPerson.get());
 		}
 
 	}
 
 	@Override
-	public Person savePerson(Person person, List<Person> dataBase) {
+	public Person savePerson(Person person) {
 	
-		dataBase.add(person);
+		jsonData.getPersons().add(person);
 
 		return person;
 	}
 
 	@Override
-	public List<String> getEmailByCity(String city, List<Person> dataBase) {
+	public List<String> getEmailByCity(String city) {
 		
 		List<String> emailList = new ArrayList<>();
 		
-		List<Person> personList = dataBase
+		List<Person> personList = jsonData.getPersons()
 				.stream()
 				.filter(p -> p.getCity().equals(city))
 				.toList();
@@ -77,9 +81,9 @@ public class PersonServiceImpl implements IPersonService {
 	}
 
 	@Override
-	public Person updatePerson(String firstName, String lastName, Person person, List<Person> dataBase) {
+	public Person updatePerson(String firstName, String lastName, Person person) {
 
-		Optional<Person> matchingPerson = dataBase
+		Optional<Person> matchingPerson = jsonData.getPersons()
 				.stream()
 				.filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
 				.findFirst();

@@ -4,21 +4,34 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.Person;
+import fr.marc.safetynetalert.repository.JsonData;
+import fr.marc.safetynetalert.service.IPersonService;
 
 public class PersonServiceImplTest {
 
-	PersonServiceImpl personServiceImpl = new PersonServiceImpl();
+	private IPersonService personService;
+	private JsonData jsonData;
+	
+	
+	@BeforeEach
+	public void init() {
+		jsonData = new JsonData();
+		jsonData.setPersons(new ArrayList<Person>());
+		jsonData.getPersons().addAll(DBConstants.PERSON_DATA_TEST);
+		personService = new PersonServiceImpl(jsonData);
+	}
 
 	@Test
 	public void getPersons_success() {
 
 		// WHEN
-		final List<Person> resultList = personServiceImpl.getPersons(DBConstants.PERSON_DATA_TEST);
+		final List<Person> resultList = personService.getPersons();
 
 		// THEN
 		assertThat(resultList.get(0).equals(DBConstants.person1));
@@ -33,7 +46,7 @@ public class PersonServiceImplTest {
 		public void getPerson_success() {
 
 			// WHEN
-			final Person resultPerson = personServiceImpl.getPerson("Marc","Sagar",DBConstants.PERSON_DATA_TEST);
+			final Person resultPerson = personService.getPerson("Marc","Sagar");
 
 			// THEN
 			assertThat(resultPerson.equals(DBConstants.person1));
@@ -43,7 +56,7 @@ public class PersonServiceImplTest {
 		public void getPerson_no_answer() {
 
 			// WHEN
-			final Person resultPerson = personServiceImpl.getPerson("Nemo","Personne",DBConstants.PERSON_DATA_TEST);
+			final Person resultPerson = personService.getPerson("Nemo","Personne");
 
 			// THEN
 			assertThat(resultPerson).isNull();
@@ -55,30 +68,22 @@ public class PersonServiceImplTest {
 
 		@Test
 		public void deletePerson_success() {
-			
-			//GIVEN
-			List<Person> personData = new ArrayList<>();
-			personData.addAll(DBConstants.PERSON_DATA_TEST);
 
 			// WHEN
-			personServiceImpl.deletePerson("Marc","Sagar",personData);
+			personService.deletePerson("Marc","Sagar");
 
 			// THEN
-			assertThat(personData).doesNotContain(DBConstants.person1);
+			assertThat(jsonData.getPersons()).doesNotContain(DBConstants.person1);
 		}
 
 		@Test
 		public void deletePerson_does_not_exist() {
 
-			//GIVEN
-			List<Person> personData = new ArrayList<>();
-			personData.addAll(DBConstants.PERSON_DATA_TEST);
-
 			// WHEN
-			personServiceImpl.deletePerson("Nemo","Personne",personData);
+			personService.deletePerson("Nemo","Personne");
 
 			// THEN
-			assertThat(personData)
+			assertThat(jsonData.getPersons())
 				.filteredOn(p -> p.getFirstName().equals("Nemo"))
 				.isEmpty();;
 		}
@@ -87,15 +92,13 @@ public class PersonServiceImplTest {
 	@Test
 	public void savePerson_success() {
 		
-		//GIVEN
-		List<Person> personData = new ArrayList<>();
-		personData.addAll(DBConstants.PERSON_DATA_TEST);
-
+		assertThat(jsonData.getPersons()).doesNotContain(DBConstants.personToAdd);
+		
 		// WHEN
-		personServiceImpl.savePerson(DBConstants.personToAdd,personData);
+		personService.savePerson(DBConstants.personToAdd);
 
 		// THEN
-		assertThat(personData).contains(DBConstants.personToAdd);
+		assertThat(jsonData.getPersons()).contains(DBConstants.personToAdd);
 	}
 	
 	@Nested
@@ -105,7 +108,7 @@ public class PersonServiceImplTest {
 		public void getEmail_success() {
 			
 			// WHEN
-			List<String> emailData = personServiceImpl.getEmailByCity("Limoges",DBConstants.PERSON_DATA_TEST);
+			List<String> emailData = personService.getEmailByCity("Limoges");
 
 			// THEN
 			assertThat(emailData.get(0).equals("sage@email.com"));
@@ -117,7 +120,7 @@ public class PersonServiceImplTest {
 		public void getEmail_no_answer() {
 
 			// WHEN
-			List<String> emailData = personServiceImpl.getEmailByCity("Trifouilly",DBConstants.PERSON_DATA_TEST);
+			List<String> emailData = personService.getEmailByCity("Trifouilly");
 
 			// THEN
 			assertThat(emailData).isEmpty();;
@@ -130,20 +133,16 @@ public class PersonServiceImplTest {
 		@Test
 		public void updatePerson_success() {
 			
-			//GIVEN
-			List<Person> personData = new ArrayList<>();
-			personData.addAll(DBConstants.PERSON_DATA_TEST);
-			
 			// WHEN
-			personServiceImpl.updatePerson("Marc","Sagar",DBConstants.personToAdd,personData);
+			personService.updatePerson("Marc","Sagar",DBConstants.personToAdd);
 
 			// THEN
 			// The entire person is updated except his firstName and lastName
-			assertThat(personData.get(0).getFirstName().equals("Marc"));
-			assertThat(personData.get(0).getLastName().equals("Sagar"));
-			assertThat(personData.get(0).getAddress().equals("1 rue de Chanteloup"));
-			assertThat(personData.get(0).getPhone().equals("12-34-56-78-00"));
-			assertThat(personData.get(0).getEmail().equals("adplus@email.com"));
+			assertThat(jsonData.getPersons().get(0).getFirstName().equals("Marc"));
+			assertThat(jsonData.getPersons().get(0).getLastName().equals("Sagar"));
+			assertThat(jsonData.getPersons().get(0).getAddress().equals("1 rue de Chanteloup"));
+			assertThat(jsonData.getPersons().get(0).getPhone().equals("12-34-56-78-00"));
+			assertThat(jsonData.getPersons().get(0).getEmail().equals("adplus@email.com"));
 		}
 
 		@Test
@@ -154,7 +153,7 @@ public class PersonServiceImplTest {
 			personData.addAll(DBConstants.PERSON_DATA_TEST);
 			
 			// WHEN
-			Person personToUpdate = personServiceImpl.updatePerson("Nemo","Personne",DBConstants.personToAdd,personData);
+			Person personToUpdate = personService.updatePerson("Nemo","Personne",DBConstants.personToAdd);
 
 			// THEN
 			assertThat(personToUpdate).isNull();

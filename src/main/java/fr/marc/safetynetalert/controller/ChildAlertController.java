@@ -11,17 +11,18 @@ import fr.marc.safetynetalert.service.IChildAlertService;
 
 @RestController
 public class ChildAlertController {
-	
+
+	private IChildAlertService childAlertService;
+
 	@Autowired
-	IChildAlertService childAlertService;
-	
-	@Autowired
-	private DataForRequest dataForRequest;
-	
-	   @GetMapping("/childAlert")
-	    public ChildAlert getChildAlertData(@RequestParam String address) {
-	     	
-	        return childAlertService.getChildAlertList(address, dataForRequest.getData());
-	    }
+	public ChildAlertController (IChildAlertService childAlertService) {
+		this.childAlertService = childAlertService;
+	};
+
+	@GetMapping("/childAlert")
+	public ChildAlert getChildAlertData(@RequestParam String address) {
+
+		return childAlertService.getChildAlertList(address);
+	}
 
 }
