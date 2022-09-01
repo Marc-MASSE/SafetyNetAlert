@@ -3,27 +3,19 @@ package fr.marc.safetynetalert.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.model.FloodAlert;
 import fr.marc.safetynetalert.model.FloodAlertPerStation;
-import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFloodAlertService;
 
 @Service
 public class FloodAlertServiceImpl implements IFloodAlertService {
-	
-	
-	//@Autowired
-	//private DataForRequest dataForRequest;
 
 	@Override
 	public List<FloodAlert> getFloodAlertList(List<String> stationList, List<ConcatenatedFormat> dataList) {
-		// TODO Auto-generated method stub
 		
-		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<FloodAlert> floodAlertList = new ArrayList<>();
 		
 		stationList.forEach(s -> {
@@ -33,17 +25,6 @@ public class FloodAlertServiceImpl implements IFloodAlertService {
 			floodAlert.setFloodAlertPerStation(new ArrayList<FloodAlertPerStation>());
 			
 			floodAlertList.add(floodAlert);
-			
-			
-			//List<ConcatenatedFormat> matchingListPart = new ArrayList<>();
-			
-			//matchingListPart = dataList
-			//	.stream()
-			//	.filter(f->f.getStationNumber().equals(s))
-			//	.toList();
-			
-			//matchingList.addAll(matchingListPart);
-			
 			});
 			 
 		
@@ -67,16 +48,7 @@ public class FloodAlertServiceImpl implements IFloodAlertService {
 				}
 			});
 			
-			
-			
 		});
-		
-
-			
-			//floodAlertList.add(floodAlert);
-		
 		return floodAlertList;
 	}
-	
-
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.MedicalRecord;
-import fr.marc.safetynetalert.model.Person;
+import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
 
 @RestController
@@ -19,26 +19,35 @@ public class MedicalRecordController {
 	@Autowired
     IMedicalRecordService medicalRecordService;
 	
+	@Autowired
+	JsonData jsonData;
+	
     @GetMapping("/medicalRecords")
     public Iterable<MedicalRecord> getMedicalRecords() {
     	
-        return medicalRecordService.getMedicalRecords();
+        return medicalRecordService.getMedicalRecords(jsonData.getMedicalRecords());
+    }
+    
+    @GetMapping("/medicalRecord")
+    public MedicalRecord getMedicalRecordByParam(@RequestParam String firstName, @RequestParam String lastName) {
+     	
+        return medicalRecordService.getMedicalRecord(firstName, lastName, jsonData.getMedicalRecords());
     }
     
     @DeleteMapping("/medicalRecord")
     public void deleteMedicalRecordByParam(@RequestParam String firstName, @RequestParam String lastName) {
      	
-        medicalRecordService.deleteMedicalRecord(firstName, lastName);
+        medicalRecordService.deleteMedicalRecord(firstName, lastName, jsonData.getMedicalRecords());
     }
     
     @PostMapping(value = "/medicalRecord")
     public MedicalRecord addMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
-    	return medicalRecordService.saveMedicalRecord(medicalRecord);
+    	return medicalRecordService.saveMedicalRecord(medicalRecord, jsonData.getMedicalRecords());
     }
     
     @PutMapping(value = "/medicalRecord")
     public MedicalRecord updatePerson(@RequestParam String firstName, @RequestParam String lastName,@RequestBody MedicalRecord medicalRecord) {
-    	return medicalRecordService.updateMedicalRecord(firstName, lastName, medicalRecord);
+    	return medicalRecordService.updateMedicalRecord(firstName, lastName, medicalRecord, jsonData.getMedicalRecords());
       
     }
 

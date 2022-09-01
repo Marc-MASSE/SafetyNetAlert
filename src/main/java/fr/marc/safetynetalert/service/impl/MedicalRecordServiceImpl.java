@@ -1,6 +1,7 @@
 package fr.marc.safetynetalert.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +22,15 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 
 
 	@Override
-	public Iterable<MedicalRecord> getMedicalRecords() {
+	public List<MedicalRecord> getMedicalRecords(List<MedicalRecord> dataBase) {
 		
-		return jsonData.getMedicalRecords();
+		return dataBase;
 	}
-
+	
 	@Override
-	public void deleteMedicalRecord(String firstName, String lastName) {
-		// TODO Auto-generated method stub
+	public MedicalRecord getMedicalRecord(String firstName, String lastName, List<MedicalRecord> dataBase) {
 		
-	}
-
-	@Override
-	public MedicalRecord saveMedicalRecord(MedicalRecord medicalRecord) {
-		
-		jsonData.getMedicalRecords().add(medicalRecord);
-		
-		return medicalRecord;
-	}
-
-	@Override
-	public MedicalRecord getMedicalRecord(String firstName, String lastName) {
-		
-		Optional<MedicalRecord> matchingMedicalRecord = jsonData.getMedicalRecords()
+		Optional<MedicalRecord> matchingMedicalRecord = dataBase
 				.stream()
 				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
 				.findFirst();
@@ -51,17 +38,37 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 		return matchingMedicalRecord.orElse(new MedicalRecord());
 	}
 
+	@Override
+	public void deleteMedicalRecord(String firstName, String lastName, List<MedicalRecord> dataBase) {
+		
+		Optional<MedicalRecord> matchingMedicalRecord = dataBase
+				.stream()
+				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
+				.findFirst();
+		if (matchingMedicalRecord.isPresent()) {
+			dataBase.remove(matchingMedicalRecord.get());
+		}
+	}
+
+	@Override
+	public MedicalRecord saveMedicalRecord(MedicalRecord medicalRecord, List<MedicalRecord> dataBase) {
+		
+		dataBase.add(medicalRecord);
+		
+		return medicalRecord;
+	}
+
+
 	/*
 	 * Calculates the age of a person identified by their first name and last name on the given date.
 	 * @return the person's age or -1 if the birth date does'nt exist
 	 */
-		
 	@Override
-	public int getPersonsAge(String firstName, String lastName, LocalDate date) {
+	public int getPersonsAge(String firstName, String lastName, LocalDate date, List<MedicalRecord> dataBase) {
 		
 		int age;
 		
-		MedicalRecord matchingMedicalRecord = jsonData.getMedicalRecords()
+		MedicalRecord matchingMedicalRecord = dataBase
 				.stream()
 				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
 				.findFirst()
@@ -77,9 +84,9 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 	}
 
 	@Override
-	public MedicalRecord updateMedicalRecord(String firstName, String lastName, MedicalRecord medicalRecord) {
+	public MedicalRecord updateMedicalRecord(String firstName, String lastName, MedicalRecord medicalRecord, List<MedicalRecord> dataBase) {
 		
-		Optional<MedicalRecord> matchingMedicalRecord = jsonData.getMedicalRecords()
+		Optional<MedicalRecord> matchingMedicalRecord = dataBase
 				.stream()
 				.filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
 				.findFirst();

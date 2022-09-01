@@ -10,13 +10,9 @@ import org.springframework.stereotype.Component;
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.service.IFireStationService;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
-import fr.marc.safetynetalert.service.IPersonService;
 
 @Component
 public class DataForRequest {
-	
-	//@Autowired
-	//IPersonService personService;
 	
 	@Autowired
 	IFireStationService stationService;
@@ -44,9 +40,9 @@ public class DataForRequest {
 			data.setPhone(p.getPhone());
 			data.setEmail(p.getEmail());
 			data.setStationNumber(stationService.getStationByAddress(p.getAddress(), jsonData.getFireStations()).getStation());
-			data.setAge(medicalRecordService.getPersonsAge(p.getFirstName(), p.getLastName(), now));
-			data.setMedications(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getMedications());
-			data.setAllergies(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getAllergies());
+			data.setAge(medicalRecordService.getPersonsAge(p.getFirstName(), p.getLastName(), now, jsonData.getMedicalRecords()));
+			data.setMedications(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName(), jsonData.getMedicalRecords()).getMedications());
+			data.setAllergies(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName(), jsonData.getMedicalRecords()).getAllergies());
 			
 			dataList.add(data);
 		});

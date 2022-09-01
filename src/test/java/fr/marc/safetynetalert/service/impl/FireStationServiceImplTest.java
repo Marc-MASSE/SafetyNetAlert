@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.FireStation;
-import fr.marc.safetynetalert.model.Person;
 
 public class FireStationServiceImplTest {
 	

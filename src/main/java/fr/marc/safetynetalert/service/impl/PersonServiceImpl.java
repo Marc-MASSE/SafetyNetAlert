@@ -11,11 +11,6 @@ import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IPersonService;
 
-/*
- * 
- * 
- * @Author Marc
- */
 
 @Service
 public class PersonServiceImpl implements IPersonService {

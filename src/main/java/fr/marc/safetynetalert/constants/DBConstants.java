@@ -51,6 +51,7 @@ public class DBConstants {
 	public static MedicalRecord medicalRecord6 = new MedicalRecord("Arthur","Bald","26/04/1995",List.of(""),List.of(""));
 	public static MedicalRecord medicalRecord7 = new MedicalRecord("Mel","Mandinos","06/24/1950",List.of("Doliprane : 500mg"),List.of("Retirement"));
 	public static MedicalRecord medicalRecordToAdd = new MedicalRecord("Adeline","Plus","05/17/1983",List.of("Camomille"),List.of("Tilleul"));
+	public static MedicalRecord medicalRecordFalseDate = new MedicalRecord("Adeline","Plus","nowhen",List.of("Camomille"),List.of("Tilleul"));
 	
 	public static final List<MedicalRecord> MEDICALRECORD_DATA_TEST = List.of(medicalRecord1,medicalRecord2,medicalRecord3,medicalRecord4,medicalRecord5,medicalRecord6,medicalRecord7);
 	
