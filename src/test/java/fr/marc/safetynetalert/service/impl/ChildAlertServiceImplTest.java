@@ -3,14 +3,18 @@ package fr.marc.safetynetalert.service.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.ChildAlert;
+import fr.marc.safetynetalert.model.FireStation;
+import fr.marc.safetynetalert.model.MedicalRecord;
+import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.DataForRequest;
-
+import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IChildAlertService;
 
 public class ChildAlertServiceImplTest {
@@ -20,8 +24,11 @@ public class ChildAlertServiceImplTest {
 	
 	@BeforeEach
 	public void init() {
-		dataForRequest = new DataForRequest();
-		dataForRequest.getDataTest();
+		JsonData jsonData = new JsonData(new ArrayList<Person>(),new ArrayList<FireStation>(),new ArrayList<MedicalRecord>());
+		jsonData.getPersons().addAll(DBConstants.PERSON_DATA_TEST);
+		jsonData.getFireStations().addAll(DBConstants.FIRESTATION_DATA_TEST);
+		jsonData.getMedicalRecords().addAll(DBConstants.MEDICALRECORD_DATA_TEST);
+		dataForRequest = new DataForRequest(jsonData);
 		childAlertService = new ChildAlertServiceImpl(dataForRequest);
 	}	
 	
@@ -40,7 +47,7 @@ public class ChildAlertServiceImplTest {
 	}
 	
 	@Test
-	public void getPhoneAlertList_no_child () {
+	public void getChildAlertList_no_child () {
 		
 		// WHEN
 		final ChildAlert resultList = childAlertService.getChildAlertList("9 rue de Framboisy");
@@ -51,7 +58,7 @@ public class ChildAlertServiceImplTest {
 	}
 
 	@Test
-	public void getPhoneAlertList_no_answer () {
+	public void getChildAlertList_no_answer () {
 		
 		// WHEN
 		final ChildAlert resultList = childAlertService.getChildAlertList("chemin de traverse");

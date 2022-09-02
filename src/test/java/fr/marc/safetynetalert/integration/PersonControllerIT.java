@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -118,8 +119,45 @@ public class PersonControllerIT {
 	            .andExpect(jsonPath("firstName", is("Adeline")))
 	            .andExpect(jsonPath("lastName", is("Plus")));
 	    }
-		
 	}
+	
+	@Nested
+	class UpdatePerson {
+		@Test
+	    public void success() throws Exception {
+			
+			ObjectMapper mapper = new ObjectMapper();  
+			
+	        mockMvc.perform(put("/person?firstName=Eric&lastName=Cadigan")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(mapper.writeValueAsString(DBConstants.personToAdd)))
+	            .andExpect(status().isOk());
+	        mockMvc.perform(get("/person?firstName=Eric&lastName=Cadigan"))
+            	.andExpect(status().isOk())
+	            .andExpect(jsonPath("firstName", is("Eric")))
+	            .andExpect(jsonPath("lastName", is("Cadigan")))
+	            .andExpect(jsonPath("address", is("1 rue de Chanteloup")))
+	            .andExpect(jsonPath("city", is("Limoges")))
+	            .andExpect(jsonPath("zip", is("87000")))
+	            .andExpect(jsonPath("phone", is("12-34-56-78-00")))
+	            .andExpect(jsonPath("email", is("adplus@email.com")));
+	    }
+		
+		@Test
+	    public void no_body() throws Exception {
+			
+			ObjectMapper mapper = new ObjectMapper();  
+			
+	        mockMvc.perform(put("/person?firstName=Nemo&lastName=Personne")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(mapper.writeValueAsString(DBConstants.personToAdd)))
+	            .andExpect(status().isOk());
+	        mockMvc.perform(get("/person?firstName=Nemo&lastName=Personne"))
+            	.andExpect(status().isOk())
+	            .andExpect(jsonPath("$[0]").doesNotExist());
+	    }
+	}
+	
 }
 
 

@@ -16,13 +16,24 @@ import fr.marc.safetynetalert.service.IMedicalRecordService;
 public class DataForRequest {
 	
 	@Autowired
-	IFireStationService stationService;
+	IFireStationService fireStationService;
 	
 	@Autowired
 	IMedicalRecordService medicalRecordService;
 	
+	//@Autowired
+	//JsonData jsonData;
+	
+	private JsonData jsonData;
+
 	@Autowired
-	JsonData jsonData;
+	public DataForRequest(JsonData jsonData) {
+		this.jsonData = jsonData;
+	}
+	
+	public DataForRequest() {
+	}
+	
 	
 	private LocalDate now = LocalDate.now();
 	
@@ -40,7 +51,7 @@ public class DataForRequest {
 			data.setAddress(p.getAddress());
 			data.setPhone(p.getPhone());
 			data.setEmail(p.getEmail());
-			data.setStationNumber(stationService.getStationByAddress(p.getAddress()).getStation());
+			data.setStationNumber(fireStationService.getStationByAddress(p.getAddress()).getStation());
 			data.setAge(medicalRecordService.getPersonsAge(p.getFirstName(), p.getLastName(), now));
 			data.setMedications(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getMedications());
 			data.setAllergies(medicalRecordService.getMedicalRecord(p.getFirstName(), p.getLastName()).getAllergies());
@@ -50,11 +61,5 @@ public class DataForRequest {
 		
 		return dataList;
 	}
-	
-	public List<ConcatenatedFormat> getDataTest() {
-		
-		return DBConstants.DATABASE_TEST;
-	}
-	
 	
 }
