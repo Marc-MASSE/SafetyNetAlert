@@ -34,16 +34,16 @@ public class FireStationController {
 		return fireStationService.getFireStations();
 	}
 	
-	
+	/*
     @GetMapping("/firestationByStation")
     public List<FireStation> getFireStationsByStationParam(@RequestParam String station) {
      	
         return fireStationService.getFireStationsByStation(station);
     }
-	
+	*/
     
     @DeleteMapping("/firestation")
-    public void deleteFireStationByParam(@RequestParam String stationNumber, @RequestParam String address) {
+    public void deleteFireStationByParam(@RequestParam String address, @RequestParam String stationNumber) {
      	
         if (address.equals("") && stationNumber.equals("")) {
         }else if (address.equals("")) {

@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ch.qos.logback.core.net.ObjectWriter;
 import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.service.impl.JsonDataService;
 
@@ -35,7 +34,7 @@ public class PersonControllerIT {
 	@Autowired
 	JsonDataService jsonDataService;
 	
-	@AfterEach
+	@BeforeEach
 	public void cleanUpTheDataBase() throws IOException {
 		jsonDataService.initialization();
 	}
