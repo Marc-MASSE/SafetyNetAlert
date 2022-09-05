@@ -3,18 +3,26 @@ package fr.marc.safetynetalert.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.model.FloodAlert;
 import fr.marc.safetynetalert.model.FloodAlertPerStation;
+import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFloodAlertService;
 
 @Service
 public class FloodAlertServiceImpl implements IFloodAlertService {
+	
+	private DataForRequest dataForRequest;
+	
+	@Autowired
+	public FloodAlertServiceImpl(DataForRequest dataForRequest) {
+		this.dataForRequest = dataForRequest;
+	}
 
 	@Override
-	public List<FloodAlert> getFloodAlertList(List<String> stationList, List<ConcatenatedFormat> dataList) {
+	public List<FloodAlert> getFloodAlertList(List<String> stationList) {
 		
 		List<FloodAlert> floodAlertList = new ArrayList<>();
 		
@@ -28,7 +36,7 @@ public class FloodAlertServiceImpl implements IFloodAlertService {
 			});
 			 
 		
-		dataList.forEach(d -> {
+		dataForRequest.getData().forEach(d -> {
 			
 			floodAlertList.forEach(f -> {
 			
