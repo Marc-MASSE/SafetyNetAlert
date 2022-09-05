@@ -15,20 +15,24 @@ import fr.marc.safetynetalert.service.IMedicalRecordService;
 @Component
 public class DataForRequest {
 	
-	@Autowired
-	IFireStationService fireStationService;
+	//@Autowired
+	//IFireStationService fireStationService;
 	
-	@Autowired
-	IMedicalRecordService medicalRecordService;
+	//@Autowired
+	//IMedicalRecordService medicalRecordService;
 	
 	//@Autowired
 	//JsonData jsonData;
 	
 	private JsonData jsonData;
+	private IFireStationService fireStationService;
+	private IMedicalRecordService medicalRecordService;
 
 	@Autowired
-	public DataForRequest(JsonData jsonData) {
+	public DataForRequest(JsonData jsonData,IFireStationService fireStationService, IMedicalRecordService medicalRecordService) {
 		this.jsonData = jsonData;
+		this.fireStationService = fireStationService;
+		this.medicalRecordService = medicalRecordService;
 	}
 	
 	public DataForRequest() {

@@ -16,6 +16,8 @@ import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IChildAlertService;
+import fr.marc.safetynetalert.service.IFireStationService;
+import fr.marc.safetynetalert.service.IMedicalRecordService;
 
 public class ChildAlertServiceImplTest {
 	
@@ -28,7 +30,9 @@ public class ChildAlertServiceImplTest {
 		jsonData.getPersons().addAll(DBConstants.PERSON_DATA_TEST);
 		jsonData.getFireStations().addAll(DBConstants.FIRESTATION_DATA_TEST);
 		jsonData.getMedicalRecords().addAll(DBConstants.MEDICALRECORD_DATA_TEST);
-		dataForRequest = new DataForRequest(jsonData);
+		IFireStationService fireStationService = new FireStationServiceImpl(jsonData);
+		IMedicalRecordService medicalRecordService = new MedicalRecordServiceImpl(jsonData);
+		dataForRequest = new DataForRequest(jsonData, fireStationService, medicalRecordService);
 		childAlertService = new ChildAlertServiceImpl(dataForRequest);
 	}	
 	
