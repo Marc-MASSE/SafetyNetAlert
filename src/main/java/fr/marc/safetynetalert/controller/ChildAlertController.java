@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.ChildAlert;
-import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IChildAlertService;
 
 @RestController

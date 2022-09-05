@@ -49,7 +49,7 @@ public class DBConstants {
 	public static MedicalRecord medicalRecord3 = new MedicalRecord("Mel","Mandinos","03/03/1998",List.of("Aspégic : 500mg"),List.of("Shellfish"));
 	public static MedicalRecord medicalRecord4 = new MedicalRecord("Ric","Bald","02/12/2010",List.of(""),List.of(""));
 	public static MedicalRecord medicalRecord5 = new MedicalRecord("Nery","Bald","01/01/1997",List.of(""),List.of(""));
-	public static MedicalRecord medicalRecord6 = new MedicalRecord("Arthur","Bald","26/04/1995",List.of(""),List.of(""));
+	public static MedicalRecord medicalRecord6 = new MedicalRecord("Arthur","Bald","04/26/1995",List.of(""),List.of(""));
 	public static MedicalRecord medicalRecord7 = new MedicalRecord("Mel","Mandinos","06/24/1950",List.of("Doliprane : 500mg"),List.of("Retirement"));
 	public static MedicalRecord medicalRecordToAdd = new MedicalRecord("Adeline","Plus","05/17/1983",List.of("Camomille"),List.of("Tilleul"));
 	public static MedicalRecord medicalRecordFalseDate = new MedicalRecord("Adeline","Plus","nowhen",List.of("Camomille"),List.of("Tilleul"));

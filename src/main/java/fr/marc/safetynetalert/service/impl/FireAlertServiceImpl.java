@@ -3,22 +3,32 @@ package fr.marc.safetynetalert.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.model.FireAlert;
+import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFireAlertService;
 
 @Service
 public class FireAlertServiceImpl implements IFireAlertService {
 	
+
+	private DataForRequest dataForRequest;
+	
+	@Autowired
+	public FireAlertServiceImpl(DataForRequest dataForRequest) {
+		this.dataForRequest = dataForRequest;
+	}
+	
 	@Override
-	public List<FireAlert> getFireAlertList(String address, List<ConcatenatedFormat> dataList) {
+	public List<FireAlert> getFireAlertList(String address) {
 		
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<FireAlert> fireAlertList = new ArrayList<>();
 		
-		matchingList = dataList
+		matchingList = dataForRequest.getData()
 				.stream()
 				.filter(f-> f.getAddress().equals(address))
 				.toList();

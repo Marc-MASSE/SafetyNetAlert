@@ -9,21 +9,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.FireAlert;
 import fr.marc.safetynetalert.repository.DataForRequest;
+import fr.marc.safetynetalert.service.IChildAlertService;
 import fr.marc.safetynetalert.service.IFireAlertService;
 
 @RestController
 public class FireAlertController {
 	
+	private IFireAlertService fireAlertService;
+
 	@Autowired
-	IFireAlertService fireAlertService;
+	public FireAlertController (IFireAlertService fireAlertService) {
+		this.fireAlertService = fireAlertService;
+	};
 	
-	@Autowired
-	private DataForRequest dataForRequest;
 	
 	@GetMapping("/fire")
 	public List<FireAlert> getFireAlertData (@RequestParam String address){
 		
-		return fireAlertService.getFireAlertList(address, dataForRequest.getData());
+		return fireAlertService.getFireAlertList(address);
 	}
 
 }
