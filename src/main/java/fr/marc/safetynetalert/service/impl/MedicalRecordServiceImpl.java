@@ -4,9 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.marc.safetynetalert.controller.PhoneAlertController;
 import fr.marc.safetynetalert.model.MedicalRecord;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IMedicalRecordService;

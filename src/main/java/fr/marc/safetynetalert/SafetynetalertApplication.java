@@ -2,6 +2,8 @@ package fr.marc.safetynetalert;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +17,8 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	@Autowired
 	JsonDataService jsonDataService;
 	
+	static Logger log = LogManager.getLogger(SafetynetalertApplication.class.getName());
+	
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(SafetynetalertApplication.class, args);
 	}
@@ -22,7 +26,7 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws IOException {
 		
-		// Logger.info("Initializing Database");
+		log.info("Initializing Database");
 		jsonDataService.initialization();
 	
 	}

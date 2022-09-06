@@ -1,5 +1,7 @@
 package fr.marc.safetynetalert.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +12,8 @@ import fr.marc.safetynetalert.service.IChildAlertService;
 
 @RestController
 public class ChildAlertController {
+	
+	static Logger log = LogManager.getLogger(ChildAlertController.class.getName());
 
 	private IChildAlertService childAlertService;
 
@@ -20,7 +24,7 @@ public class ChildAlertController {
 
 	@GetMapping("/childAlert")
 	public ChildAlert getChildAlertData(@RequestParam String address) {
-
+		log.info("GET request - endpoint /childAlert - address = "+address);
 		return childAlertService.getChildAlertList(address);
 	}
 

@@ -2,6 +2,8 @@ package fr.marc.safetynetalert.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,8 @@ import fr.marc.safetynetalert.service.IFloodAlertService;
 @RestController
 public class FloodAlertController {
 	
+	static Logger log = LogManager.getLogger(FloodAlertController.class.getName());
+	
 	private IFloodAlertService floodAlertService;
 
 	@Autowired
@@ -23,7 +27,7 @@ public class FloodAlertController {
 	
 	@GetMapping("/flood/stations")
 	public List<FloodAlert> getFloodAlertData(@RequestParam List<String> stations){
-		
+		log.info("GET request - endpoint /flood/stations - stationNumber's list = "+stations);
 		return floodAlertService.getFloodAlertList(stations);
 		
 	}
