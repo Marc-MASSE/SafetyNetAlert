@@ -147,10 +147,6 @@ public class PersonServiceImplTest {
 
 		@Test
 		public void updatePerson_does_not_exist() {
-
-			//GIVEN
-			List<Person> personData = new ArrayList<>();
-			personData.addAll(DBConstants.PERSON_DATA_TEST);
 			
 			// WHEN
 			Person personToUpdate = personService.updatePerson("Nemo","Personne",DBConstants.personToAdd);

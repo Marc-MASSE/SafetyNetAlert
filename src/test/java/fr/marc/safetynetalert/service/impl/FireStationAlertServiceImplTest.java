@@ -20,7 +20,6 @@ import fr.marc.safetynetalert.service.IFireStationAlertService;
 import fr.marc.safetynetalert.service.IFireStationService;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
 
-@ExtendWith(MockitoExtension.class)
 public class FireStationAlertServiceImplTest {
 	
 	private IFireStationAlertService fireStationAlertService;

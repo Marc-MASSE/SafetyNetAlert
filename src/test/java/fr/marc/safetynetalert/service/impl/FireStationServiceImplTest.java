@@ -177,10 +177,6 @@ public class FireStationServiceImplTest {
 		@Test
 		public void updateFireStation_does_not_exist() {
 
-			//GIVEN
-			List<FireStation> fireStationData = new ArrayList<>();
-			fireStationData.addAll(DBConstants.FIRESTATION_DATA_TEST);
-
 			// WHEN
 			FireStation fireStationToUpdate = fireStationService.updateFireStation("10 rue de Nulle Part","4");
 

@@ -38,6 +38,7 @@ public class FireStationAlertServiceImpl implements IFireStationAlertService {
 		FireStationAlert fireStationAlert = new FireStationAlert();
 		List<ConcatenatedFormat> matchingList = new ArrayList<>();
 		List<FireStationAlertPerson> fireStationAlertPersonList = new ArrayList<>();
+		fireStationAlert.setFireStationAlertPersonList(fireStationAlertPersonList);
 		
 		matchingList = dataForRequest.getData()
 			.stream()

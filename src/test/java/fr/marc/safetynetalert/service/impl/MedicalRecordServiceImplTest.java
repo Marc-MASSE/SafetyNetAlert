@@ -141,8 +141,7 @@ public class MedicalRecordServiceImplTest {
 
 			// GIVEN
 			LocalDate currentDate = LocalDate.of(2022, 07, 19);
-			List<MedicalRecord> dataList = new ArrayList<>();
-			dataList.add(DBConstants.medicalRecordFalseDate);
+			jsonData.getMedicalRecords().add(DBConstants.medicalRecordFalseDate);
 
 			// WHEN
 			final int age = medicalRecordService.getPersonsAge("Adeline","Plus",currentDate);

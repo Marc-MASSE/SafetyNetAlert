@@ -52,7 +52,6 @@ public class PersonController {
 		return personService.getEmailByCity(city);
 	}
     
-    
     @DeleteMapping("/person")
     public void deletePersonByParam(@RequestParam String firstName, @RequestParam String lastName) {
 		log.info("DELETE request - endpoint /person - firstName = "+firstName+" lastName = "+lastName);
@@ -69,9 +68,5 @@ public class PersonController {
     public Person updatePerson(@RequestParam String firstName, @RequestParam String lastName,@RequestBody Person person) {
 		log.info("PUT request - endpoint /person - firstName = "+firstName+" lastName = "+lastName+" body = "+person);
     	return personService.updatePerson(firstName, lastName, person);
-      
     }
-    
-    
-    
 }
