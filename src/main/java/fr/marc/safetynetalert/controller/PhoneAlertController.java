@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.service.IPhoneAlertService;
 
+/*
+* Controller used for URL /phoneAlert?firestation=<firestation_number>
+* 
+* @param firestation
+* Return list of phone numbers of people covered by this fire station
+*/
+
 @RestController
 public class PhoneAlertController {
 	

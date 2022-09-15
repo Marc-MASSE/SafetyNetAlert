@@ -10,6 +10,12 @@ import fr.marc.safetynetalert.model.FireStation;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IFireStationService;
 
+/*
+ * Class used for endpoint /firestation
+ * 
+ * For updating fireStation's data list
+ */
+
 @Service
 public class FireStationServiceImpl implements IFireStationService {
 	

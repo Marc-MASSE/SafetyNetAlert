@@ -1,5 +1,6 @@
 package fr.marc.safetynetalert.constants;
 
+import java.util.Arrays;
 import java.util.List;
 
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
@@ -38,6 +39,14 @@ public class DBConstants {
 	public static FireStation fireStation4 = new FireStation("4 rue de Framboisy","3");
 	public static FireStation fireStation5 = new FireStation("7 rue de Framboisy","2");
 	public static FireStation fireStationToAdd = new FireStation("1 rue de Chanteloup","4");
+	
+	public static List<FireStation> getFireStationList() {
+		return Arrays.asList(new FireStation("9 rue de Framboisy", "1"),
+				new FireStation("11 rue de Framboisy", "1"),
+				new FireStation("3 rue de Framboisy", "2"),
+				new FireStation("4 rue de Framboisy", "3"),
+				new FireStation("7 rue de Framboisy", "2"));
+	}
 	
 	public static final List<FireStation> FIRESTATION_DATA_TEST = List.of(fireStation1,fireStation2,fireStation3,fireStation4,fireStation5);
 	

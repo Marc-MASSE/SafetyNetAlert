@@ -11,6 +11,14 @@ import fr.marc.safetynetalert.model.FloodAlertPerStation;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFloodAlertService;
 
+/*
+* Class used for URL /flood/stations?stations=<a list of station_number>
+* 
+* @param stationList
+* Return, by station, the list of people (firstName, lastName, phone, age, medications, allergies)
+* 			covered by these stations
+*/
+
 @Service
 public class FloodAlertServiceImpl implements IFloodAlertService {
 	

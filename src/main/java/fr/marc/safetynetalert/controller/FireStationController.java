@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.marc.safetynetalert.model.FireStation;
 import fr.marc.safetynetalert.service.IFireStationService;
 
+/*
+ * Controller used for endpoint /firestation
+ * 
+ * For updating fireStation's data list
+ */
+
 @RestController
 public class FireStationController {
 	

@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.marc.safetynetalert.model.MedicalRecord;
-import fr.marc.safetynetalert.repository.JsonData;
-import fr.marc.safetynetalert.service.IFireStationService;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
+
+/*
+ * Controller used for endpoint /medicalRecord
+ * 
+ * For updating medicalRecord's data list
+ */
 
 @RestController
 public class MedicalRecordController {

@@ -10,6 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.marc.safetynetalert.model.ChildAlert;
 import fr.marc.safetynetalert.service.IChildAlertService;
 
+/*
+ * Controller used for URL /childAlert?address=<address>
+ * 
+ * @param address
+ * Return list of children and adults (firstName, lastName, age)
+ * 			 who live at this address
+ * 			return nothing if there is no child
+ */
+
 @RestController
 public class ChildAlertController {
 	

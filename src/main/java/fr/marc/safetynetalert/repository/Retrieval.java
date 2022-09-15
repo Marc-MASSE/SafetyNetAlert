@@ -15,8 +15,15 @@ import fr.marc.safetynetalert.model.MedicalRecord;
 import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.util.ToStringListConverter;
 
+/*
+ * Class used to read and collect data contained in data.json
+ */
+
 public class Retrieval {
 	
+	/*
+	 * @return person's list contained in data.json
+	 */
 	public static List<Person> personsList() throws IOException {
 		
 	    byte[] bytesFile = Files.readAllBytes(new File(DBConstants.PATH_TO_JSON_FILE).toPath());
@@ -42,6 +49,9 @@ public class Retrieval {
 		return persons;
 	}
 
+	/*
+	 * @return fireStation's list contained in data.json
+	 */
 	public static List<FireStation> fireStationsList() throws IOException {
 		
 	    byte[] bytesFile = Files.readAllBytes(new File(DBConstants.PATH_TO_JSON_FILE).toPath());
@@ -62,6 +72,9 @@ public class Retrieval {
 		return fireStations;
 	}
 
+	/*
+	 * @return medicalRecord's list contained in data.json
+	 */
 	public static List<MedicalRecord> medicalRecordsList() throws IOException {
 		
 	    byte[] bytesFile = Files.readAllBytes(new File(DBConstants.PATH_TO_JSON_FILE).toPath());

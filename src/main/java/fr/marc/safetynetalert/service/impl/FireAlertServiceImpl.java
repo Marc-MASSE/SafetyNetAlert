@@ -11,6 +11,14 @@ import fr.marc.safetynetalert.model.FireAlert;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFireAlertService;
 
+/*
+ * Class used for URL /fire?address=<address>
+ * 
+ * @param address
+ * Return list of people (firstName, lastName, phone, age, medications, allergies)
+ * 			who live at this address
+ */
+
 @Service
 public class FireAlertServiceImpl implements IFireAlertService {
 	

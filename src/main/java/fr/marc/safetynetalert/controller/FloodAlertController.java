@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.marc.safetynetalert.model.FloodAlert;
 import fr.marc.safetynetalert.service.IFloodAlertService;
 
+/*
+* Controller used for URL /flood/stations?stations=<a list of station_number>
+* 
+* @param stationList
+* Return, by station, the list of people (firstName, lastName, phone, age, medications, allergies)
+* 			covered by these stations
+*/
+
 @RestController
 public class FloodAlertController {
 	

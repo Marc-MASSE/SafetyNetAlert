@@ -7,22 +7,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.service.IFireStationService;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
 
+/*
+ * Class used to collect data from person's list, fireStation's list and medicalRecord's list
+ * Return a list of firstName, lastName, address, phone, email, stationNumber, age, medications, allergies
+ */
+
 @Component
 public class DataForRequest {
-	
-	//@Autowired
-	//IFireStationService fireStationService;
-	
-	//@Autowired
-	//IMedicalRecordService medicalRecordService;
-	
-	//@Autowired
-	//JsonData jsonData;
 	
 	private JsonData jsonData;
 	private IFireStationService fireStationService;

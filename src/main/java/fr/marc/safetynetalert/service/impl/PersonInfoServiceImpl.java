@@ -11,6 +11,16 @@ import fr.marc.safetynetalert.model.PersonInfo;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IPersonInfoService;
 
+/*
+* Class used for URL /personInfo?firstName=<firstName>&lastName=<lastName>
+* 
+* @param firsName&lastName
+* Return firstName, lastName, address, age, email, medications, allergies
+* 			of this person or a list if there are other persons with the same
+* 			firstName and lastName
+*/
+
+
 @Service
 public class PersonInfoServiceImpl implements IPersonInfoService {
 	

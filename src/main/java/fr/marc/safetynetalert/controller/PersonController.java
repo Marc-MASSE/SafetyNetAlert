@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.service.IPersonService;
 
+/*
+ * Controller used for endpoint /person
+ * 
+ * For updating person's data list
+ */
+
 @RestController
 public class PersonController {
 	

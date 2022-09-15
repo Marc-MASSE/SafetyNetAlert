@@ -10,6 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.marc.safetynetalert.model.FireStationAlert;
 import fr.marc.safetynetalert.service.IFireStationAlertService;
 
+/*
+* Controller used for URL /firestation?stationNumber=<station_number>
+* 
+* @param station
+* Return children's number,adults' number and the list of people
+* 			(firstName, lastName, address, phone)
+* 			covered by this station
+*/
+
 @RestController
 public class FireStationAlertController {
 	

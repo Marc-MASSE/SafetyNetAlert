@@ -10,6 +10,13 @@ import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IPhoneAlertService;
 
+/*
+* Class used for URL /phoneAlert?firestation=<firestation_number>
+* 
+* @param firestation
+* Return list of phone numbers of people covered by this fire station
+*/
+
 @Service
 public class PhoneAlertServiceImpl implements IPhoneAlertService {
 	

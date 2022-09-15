@@ -12,6 +12,15 @@ import fr.marc.safetynetalert.model.ConcatenatedFormat;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IChildAlertService;
 
+/*
+ * Class used for URL /childAlert?address=<address>
+ * 
+ * @param address
+ * Return list of children and adults (firstName, lastName, age)
+ * 			 who live at this address
+ * 			return nothing if there is no child
+ */
+
 @Service
 public class ChildAlertServiceImpl implements IChildAlertService {
 

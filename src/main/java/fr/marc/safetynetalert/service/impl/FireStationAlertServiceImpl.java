@@ -12,11 +12,17 @@ import fr.marc.safetynetalert.model.FireStationAlertPerson;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.service.IFireStationAlertService;
 
+/*
+* Class used for URL /firestation?stationNumber=<station_number>
+* 
+* @param station
+* Return children's number,adults' number and the list of people
+* 			(firstName, lastName, address, phone)
+* 			covered by this station
+*/
+
 @Service
 public class FireStationAlertServiceImpl implements IFireStationAlertService {
-	
-	//@Autowired
-	//private DataForRequest dataForRequest;
 
 	private int childNumber;
 	private int adultNumber;
@@ -28,10 +34,6 @@ public class FireStationAlertServiceImpl implements IFireStationAlertService {
 		this.dataForRequest = dataForRequest;
 	}
 
-	/*
-	 * @return a data list that contains FirstName, LastName, Address, Phone, 
-	 * StationNumber (the station on which this person depends) and the person's Age
-	 */
 	@Override
 	public FireStationAlert getFireStationsAlert(String station) {
 		

@@ -12,6 +12,12 @@ import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IPersonService;
 
 
+/*
+ * Class used for endpoint /person
+ * 
+ * For updating person's data list
+ */
+
 @Service
 public class PersonServiceImpl implements IPersonService {
 
@@ -65,6 +71,13 @@ public class PersonServiceImpl implements IPersonService {
 		return person;
 	}
 
+	
+	/*
+	* Class used for URL /communityEmail?city=<city>
+	* 
+	* @param city
+	* @return list of email of people who live in this city
+	*/
 	@Override
 	public List<String> getEmailByCity(String city) {
 		
