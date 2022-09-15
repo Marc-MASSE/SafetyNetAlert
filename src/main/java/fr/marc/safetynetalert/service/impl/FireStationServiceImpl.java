@@ -3,6 +3,8 @@ package fr.marc.safetynetalert.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import fr.marc.safetynetalert.service.IFireStationService;
 public class FireStationServiceImpl implements IFireStationService {
 	
 	private JsonData jsonData;
+	
+	static Logger log = LogManager.getLogger(FireStationServiceImpl.class.getName());
 	
 	@Autowired
 	public FireStationServiceImpl(JsonData jsonData) {
@@ -74,6 +78,7 @@ public class FireStationServiceImpl implements IFireStationService {
 				.filter(f -> f.getAddress().equals(address))
 				.findFirst();
 		if (matchingFireStation.isPresent()) {
+			log.error("FireStation to delete = "+matchingFireStation);
 			jsonData.getFireStations().remove(matchingFireStation.get());
 		}
 		

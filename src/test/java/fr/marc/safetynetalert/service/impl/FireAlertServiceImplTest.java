@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.marc.safetynetalert.constants.DBConstants;
+import fr.marc.safetynetalert.constants.DBTest;
 import fr.marc.safetynetalert.model.FireAlert;
 import fr.marc.safetynetalert.model.FireStation;
 import fr.marc.safetynetalert.model.MedicalRecord;
@@ -26,10 +27,16 @@ public class FireAlertServiceImplTest {
 	
 	@BeforeEach
 	public void init() {
-		JsonData jsonData = new JsonData(new ArrayList<Person>(),new ArrayList<FireStation>(),new ArrayList<MedicalRecord>());
-		jsonData.getPersons().addAll(DBConstants.PERSON_DATA_TEST);
-		jsonData.getFireStations().addAll(DBConstants.FIRESTATION_DATA_TEST);
-		jsonData.getMedicalRecords().addAll(DBConstants.MEDICALRECORD_DATA_TEST);
+		//JsonData jsonData = new JsonData(new ArrayList<Person>(),new ArrayList<FireStation>(),new ArrayList<MedicalRecord>());
+		JsonData jsonData = new JsonData();
+		//jsonData.getPersons().addAll(DBConstants.PERSON_DATA_TEST);
+		//jsonData.getFireStations().addAll(DBConstants.FIRESTATION_DATA_TEST);
+		//jsonData.getMedicalRecords().addAll(DBConstants.MEDICALRECORD_DATA_TEST);
+		
+		jsonData.setPersons(DBTest.getPersonList());
+		jsonData.setFireStations(DBTest.getFireStationList());
+		jsonData.setMedicalRecords(DBTest.getMedicalRecordList());
+		
 		IFireStationService fireStationService = new FireStationServiceImpl(jsonData);
 		IMedicalRecordService medicalRecordService = new MedicalRecordServiceImpl(jsonData);
 		dataForRequest = new DataForRequest(jsonData, fireStationService, medicalRecordService);
