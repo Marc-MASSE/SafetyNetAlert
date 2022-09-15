@@ -28,7 +28,7 @@ public class PhoneAlertServiceImpl implements IPhoneAlertService {
 		
 		matchingList = dataForRequest.getData()
 				.stream()
-				.filter(f-> f.getStationNumber().toString().equals(firestation))
+				.filter(f-> f.getStationNumber() == null ? false : f.getStationNumber().toString().equals(firestation))
 				.toList();
 		
 		matchingList.forEach(m -> {

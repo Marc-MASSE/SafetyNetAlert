@@ -11,7 +11,6 @@ public class DBConstants {
 	
 	public static final String PATH_TO_JSON_FILE = "src/main/resources/data.json";
 	
-	/*
 	public static ConcatenatedFormat concat1 = new ConcatenatedFormat("Marc","Sagar","9 rue de Framboisy","12-34-56-78-90","sage@email.com","1",56,List.of("Doliprane : 1000mg"),List.of("Peniciline"));
 	public static ConcatenatedFormat concat2 = new ConcatenatedFormat("Françoise","Secondigny","11 rue de Framboisy","12-34-56-78-97","fsec@email.com","1",21,List.of(""),List.of(""));
 	public static ConcatenatedFormat concat3 = new ConcatenatedFormat("Mel","Mandinos","3 rue de Framboisy","12-34-56-78-30","barde@email.com","2",24,List.of("Aspégic : 500mg"),List.of("Shellfish"));
@@ -21,7 +20,6 @@ public class DBConstants {
 	public static ConcatenatedFormat concat7 = new ConcatenatedFormat("Mel","Mandinos","7 rue de Framboisy","12-34-56-78-97","bardesenior@email.com","2",72,List.of("Doliprane : 500mg"),List.of("Retirement"));
 	
 	public static final List<ConcatenatedFormat> DATABASE_TEST = List.of(concat1,concat2,concat3,concat4,concat5,concat6,concat7);
-	*/
 	
 	public static Person person1 = new Person("Marc","Sagar","9 rue de Framboisy","Limoges","87000","12-34-56-78-90","sage@email.com");
 	public static Person person2 = new Person("Françoise","Secondigny","11 rue de Framboisy","Limoges","87000","12-34-56-78-97","fsec@email.com");
@@ -29,11 +27,10 @@ public class DBConstants {
 	public static Person person4 = new Person("Ric","Bald","4 rue de Framboisy","Limoges","87000","12-34-56-78-45","ric@email.com");
 	public static Person person5 = new Person("Nery","Bald","4 rue de Framboisy","Limoges","87000","12-34-56-78-45","nery@email.com");
 	public static Person person6 = new Person("Arthur","Bald","4 rue de Framboisy","Limoges","87000","12-34-56-78-45","art@email.com");
-	public static Person person7 = new Person("Mel","Mandinos","7 rue de Framboisy","Limoges","87000","12-34-56-78-97","bardesenior@email.com");
+	public static Person person7 = new Person("Mel","Mandinos","7 rue de Framboisy","Limoges","87000","12-34-56-78-98","bardesenior@email.com");
 	public static Person personToAdd = new Person("Adeline","Plus","1 rue de Chanteloup","Limoges","87000","12-34-56-78-00","adplus@email.com");
 	
 	public static final List<Person> PERSON_DATA_TEST = List.of(person1,person2,person3,person4,person5,person6,person7);
-	//public static List<Person> PERSON_DATA_TEST = Arrays.asList(person1,person2,person3,person4,person5,person6,person7);
 	
 	public static FireStation fireStation1 = new FireStation("9 rue de Framboisy","1");
 	public static FireStation fireStation2 = new FireStation("11 rue de Framboisy","1");

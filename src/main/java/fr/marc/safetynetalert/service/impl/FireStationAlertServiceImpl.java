@@ -42,7 +42,7 @@ public class FireStationAlertServiceImpl implements IFireStationAlertService {
 		
 		matchingList = dataForRequest.getData()
 			.stream()
-			.filter(f-> f.getStationNumber().toString().equals(station))
+			.filter(f-> f.getStationNumber() == null ? false : f.getStationNumber().toString().equals(station))
 			.toList();
 		
 		childNumber = 0;

@@ -38,10 +38,10 @@ public class PhoneAlertServiceImplTest {
 	public void getPhoneAlertList_success () {
 		
 		// WHEN
-		final List<String> resultList = phoneAlertService.getPhoneAlertList("1");
+		final List<String> resultList = phoneAlertService.getPhoneAlertList("2");
 
 		// THEN
-		assertThat(resultList).isEqualTo(List.of("12-34-56-78-90","12-34-56-78-97"));
+		assertThat(resultList).isEqualTo(List.of("12-34-56-78-30","12-34-56-78-98"));
 	}
 	
 	@Test

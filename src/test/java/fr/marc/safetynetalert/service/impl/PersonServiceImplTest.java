@@ -70,10 +70,10 @@ public class PersonServiceImplTest {
 		public void deletePerson_success() {
 
 			// WHEN
-			personService.deletePerson("Marc","Sagar");
+			personService.deletePerson("Mel","Mandinos");
 
 			// THEN
-			assertThat(jsonData.getPersons()).doesNotContain(DBConstants.person1);
+			assertThat(jsonData.getPersons()).doesNotContain(DBConstants.person3);
 		}
 
 		@Test

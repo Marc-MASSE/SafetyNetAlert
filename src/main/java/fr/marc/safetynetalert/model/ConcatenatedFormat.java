@@ -18,7 +18,6 @@ public class ConcatenatedFormat {
 	public ConcatenatedFormat() {
 	}
 
-	/*
 	public ConcatenatedFormat(String firstName, String lastName, String address, String phone, String email,
 			String stationNumber, int age, List<String> medications, List<String> allergies) {
 		this.firstName = firstName;
@@ -31,7 +30,6 @@ public class ConcatenatedFormat {
 		this.medications = medications;
 		this.allergies = allergies;
 	}
-	*/
 
 	public String getFirstName() {
 		return firstName;
