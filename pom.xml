@@ -26,7 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -135,14 +134,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.8.2</version>
+				<version>3.12.1</version>
 			</plugin>
 
 			<!-- Jacoco plugin -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.6</version>
+				<version>0.8.8</version>
 				<executions>
 					<execution>
 						<id>jacoco-initialize</id>
@@ -159,6 +158,7 @@
 					</execution>
 
 					<!-- Configuration du rapport de couverture d'intégration de jacoco -->
+					<!-- 
 					<execution>
 						<id>before-integration-test-execution</id>
 						<phase>pre-integration-test</phase>
@@ -181,11 +181,13 @@
 							<outputDirectory>${project.reporting.outputDirectory}/jacoco-integration-test-coverage-report</outputDirectory>
 						</configuration>
 					</execution>
+					-->
 
 				</executions>
 			</plugin>
 
 			<!-- Configuring failsafe -->
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -202,6 +204,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 
 		</plugins>
 	</build>
