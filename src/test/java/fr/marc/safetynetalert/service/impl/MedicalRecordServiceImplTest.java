@@ -10,12 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import fr.marc.safetynetalert.constants.DBConstants;
-import fr.marc.safetynetalert.model.FireStation;
+import fr.marc.safetynetalert.constants.DBTest;
 import fr.marc.safetynetalert.model.MedicalRecord;
-import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.JsonData;
-import fr.marc.safetynetalert.service.IFireStationService;
 import fr.marc.safetynetalert.service.IMedicalRecordService;
 
 public class MedicalRecordServiceImplTest {
@@ -23,11 +20,17 @@ public class MedicalRecordServiceImplTest {
 	private IMedicalRecordService medicalRecordService;
 	private JsonData jsonData;
 	
+	private MedicalRecord medicalRecord1 = new MedicalRecord("Marc","Sagar","11/25/1966",List.of("Doliprane : 1000mg"),List.of("Peniciline"));
+	private MedicalRecord medicalRecord5 = new MedicalRecord("Nery","Bald","01/01/1997",List.of(""),List.of(""));
+	private MedicalRecord medicalRecord7 = new MedicalRecord("Mel","Mandinos","06/24/1950",List.of("Doliprane : 500mg"),List.of("Retirement"));
+	private MedicalRecord medicalRecordToAdd = new MedicalRecord("Adeline","Plus","05/17/1983",List.of("Camomille"),List.of("Tilleul"));
+	private MedicalRecord medicalRecordFalseDate = new MedicalRecord("Adeline","Plus","nowhen",List.of("Camomille"),List.of("Tilleul"));
+	
 	@BeforeEach
 	public void init() {
 		jsonData = new JsonData();
 		jsonData.setMedicalRecords(new ArrayList<MedicalRecord>());
-		jsonData.getMedicalRecords().addAll(DBConstants.MEDICALRECORD_DATA_TEST);
+		jsonData.getMedicalRecords().addAll(DBTest.getMedicalRecordList());
 		medicalRecordService = new MedicalRecordServiceImpl(jsonData);
 	}
 	
@@ -38,9 +41,9 @@ public class MedicalRecordServiceImplTest {
 		final List<MedicalRecord> resultList = medicalRecordService.getMedicalRecords();
 
 		// THEN
-		assertThat(resultList.get(0).equals(DBConstants.medicalRecord1));
-		assertThat(resultList.get(4).equals(DBConstants.medicalRecord5));
-		assertThat(resultList.get(6).equals(DBConstants.medicalRecord7));
+		assertThat(resultList.get(0).equals(medicalRecord1));
+		assertThat(resultList.get(4).equals(medicalRecord5));
+		assertThat(resultList.get(6).equals(medicalRecord7));
 	}
 	
 	@Nested
@@ -53,7 +56,7 @@ public class MedicalRecordServiceImplTest {
 			final MedicalRecord resultMedicalRecord = medicalRecordService.getMedicalRecord("Marc","Sagar");
 
 			// THEN
-			assertThat(resultMedicalRecord.equals(DBConstants.medicalRecord1));
+			assertThat(resultMedicalRecord.equals(medicalRecord1));
 		}
 
 		@Test
@@ -81,7 +84,7 @@ public class MedicalRecordServiceImplTest {
 			medicalRecordService.deleteMedicalRecord("Marc","Sagar");
 
 			// THEN
-			assertThat(jsonData.getMedicalRecords()).doesNotContain(DBConstants.medicalRecord1);
+			assertThat(jsonData.getMedicalRecords()).doesNotContain(medicalRecord1);
 		}
 
 		@Test
@@ -100,11 +103,13 @@ public class MedicalRecordServiceImplTest {
 	@Test
 	public void saveMedicalRecord_success() {
 
+		assertThat(jsonData.getMedicalRecords()).doesNotContain(medicalRecordToAdd);
+		
 		// WHEN
-		medicalRecordService.saveMedicalRecord(DBConstants.medicalRecordToAdd);
+		medicalRecordService.saveMedicalRecord(medicalRecordToAdd);
 
 		// THEN
-		assertThat(jsonData.getMedicalRecords()).contains(DBConstants.medicalRecordToAdd);
+		assertThat(jsonData.getMedicalRecords()).contains(medicalRecordToAdd);
 	}
 	
 	@Nested
@@ -141,7 +146,7 @@ public class MedicalRecordServiceImplTest {
 
 			// GIVEN
 			LocalDate currentDate = LocalDate.of(2022, 07, 19);
-			jsonData.getMedicalRecords().add(DBConstants.medicalRecordFalseDate);
+			jsonData.getMedicalRecords().add(medicalRecordFalseDate);
 
 			// WHEN
 			final int age = medicalRecordService.getPersonsAge("Adeline","Plus",currentDate);
@@ -158,8 +163,10 @@ public class MedicalRecordServiceImplTest {
 		@Test
 		public void updateMedicalRecord_success() {
 			
+			assertThat(jsonData.getMedicalRecords().get(0).equals(medicalRecord1));
+			
 			// WHEN
-			medicalRecordService.updateMedicalRecord("Marc","Sagar",DBConstants.medicalRecordToAdd);
+			medicalRecordService.updateMedicalRecord("Marc","Sagar",medicalRecordToAdd);
 
 			// THEN
 			// The entire medical record is updated except his firstName and lastName
@@ -174,7 +181,7 @@ public class MedicalRecordServiceImplTest {
 		public void updateMedicalRecord_does_not_exist() {
 			
 			// WHEN
-			MedicalRecord medicalRecordToUpdate = medicalRecordService.updateMedicalRecord("Nemo","Personne",DBConstants.medicalRecordToAdd);
+			MedicalRecord medicalRecordToUpdate = medicalRecordService.updateMedicalRecord("Nemo","Personne",medicalRecordToAdd);
 
 			// THEN
 			assertThat(medicalRecordToUpdate).isNull();

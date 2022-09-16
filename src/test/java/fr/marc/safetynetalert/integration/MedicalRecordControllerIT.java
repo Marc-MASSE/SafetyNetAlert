@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fr.marc.safetynetalert.constants.DBConstants;
+import fr.marc.safetynetalert.model.MedicalRecord;
 import fr.marc.safetynetalert.service.impl.JsonDataService;
 
 @SpringBootTest
@@ -34,6 +34,8 @@ public class MedicalRecordControllerIT {
 	
 	@Autowired
 	JsonDataService jsonDataService;
+	
+	private MedicalRecord medicalRecordToAdd = new MedicalRecord("Adeline","Plus","05/17/1983",List.of("Camomille"),List.of("Tilleul"));
 	
 	@BeforeEach
 	public void cleanUpTheDataBase() throws IOException {
@@ -97,7 +99,7 @@ public class MedicalRecordControllerIT {
 			
 	        mockMvc.perform(post("/medicalRecord")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(DBConstants.medicalRecordToAdd)))
+	        		.content(mapper.writeValueAsString(medicalRecordToAdd)))
 	            .andExpect(status().isOk());
 	        mockMvc.perform(get("/medicalRecord?firstName=Adeline&lastName=Plus"))
             	.andExpect(status().isOk())
@@ -115,7 +117,7 @@ public class MedicalRecordControllerIT {
 			
 	        mockMvc.perform(put("/medicalRecord?firstName=Eric&lastName=Cadigan")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(DBConstants.medicalRecordToAdd)))
+	        		.content(mapper.writeValueAsString(medicalRecordToAdd)))
 	            .andExpect(status().isOk());
 	        mockMvc.perform(get("/medicalRecord?firstName=Eric&lastName=Cadigan"))
             	.andExpect(status().isOk())
@@ -133,7 +135,7 @@ public class MedicalRecordControllerIT {
 			
 	        mockMvc.perform(put("/medicalRecord?firstName=Nemo&lastName=Personne")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(DBConstants.medicalRecordToAdd)))
+	        		.content(mapper.writeValueAsString(medicalRecordToAdd)))
 	            .andExpect(status().isOk());
 	        mockMvc.perform(get("/medicalRecord?firstName=Nemo&lastName=Personne"))
             	.andExpect(status().isOk())

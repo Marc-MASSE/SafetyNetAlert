@@ -2,18 +2,13 @@ package fr.marc.safetynetalert.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.marc.safetynetalert.constants.DBConstants;
 import fr.marc.safetynetalert.constants.DBTest;
 import fr.marc.safetynetalert.model.FireAlert;
-import fr.marc.safetynetalert.model.FireStation;
-import fr.marc.safetynetalert.model.MedicalRecord;
-import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.repository.DataForRequest;
 import fr.marc.safetynetalert.repository.JsonData;
 import fr.marc.safetynetalert.service.IFireAlertService;
@@ -27,12 +22,7 @@ public class FireAlertServiceImplTest {
 	
 	@BeforeEach
 	public void init() {
-		//JsonData jsonData = new JsonData(new ArrayList<Person>(),new ArrayList<FireStation>(),new ArrayList<MedicalRecord>());
 		JsonData jsonData = new JsonData();
-		//jsonData.getPersons().addAll(DBConstants.PERSON_DATA_TEST);
-		//jsonData.getFireStations().addAll(DBConstants.FIRESTATION_DATA_TEST);
-		//jsonData.getMedicalRecords().addAll(DBConstants.MEDICALRECORD_DATA_TEST);
-		
 		jsonData.setPersons(DBTest.getPersonList());
 		jsonData.setFireStations(DBTest.getFireStationList());
 		jsonData.setMedicalRecords(DBTest.getMedicalRecordList());

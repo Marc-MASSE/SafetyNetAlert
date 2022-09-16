@@ -19,11 +19,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fr.marc.safetynetalert.constants.DBConstants;
+import fr.marc.safetynetalert.model.FireStation;
 import fr.marc.safetynetalert.service.impl.JsonDataService;
 
 @SpringBootTest
@@ -35,6 +33,8 @@ public class FireStationControllerIT {
 	
 	@Autowired
 	JsonDataService jsonDataService;
+	
+	private FireStation fireStationToAdd = new FireStation("1 rue de Chanteloup","4");
 	
 	@BeforeEach
 	public void cleanUpTheDataBase() throws IOException {
@@ -81,7 +81,7 @@ public class FireStationControllerIT {
 				
 		    mockMvc.perform(post("/firestation")
 		        	.contentType(MediaType.APPLICATION_JSON)
-		        	.content(mapper.writeValueAsString(DBConstants.fireStationToAdd)))
+		        	.content(mapper.writeValueAsString(fireStationToAdd)))
 		        .andExpect(status().isOk());
 		    mockMvc.perform(get("/firestations"))
 	            .andExpect(status().isOk())

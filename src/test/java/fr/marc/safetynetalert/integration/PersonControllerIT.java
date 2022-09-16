@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fr.marc.safetynetalert.constants.DBConstants;
+import fr.marc.safetynetalert.model.Person;
 import fr.marc.safetynetalert.service.impl.JsonDataService;
 
 @SpringBootTest
@@ -33,6 +33,8 @@ public class PersonControllerIT {
 	
 	@Autowired
 	JsonDataService jsonDataService;
+	
+	private Person personToAdd = new Person("Adeline","Plus","1 rue de Chanteloup","Limoges","87000","12-34-56-78-00","adplus@email.com");
 	
 	@BeforeEach
 	public void cleanUpTheDataBase() throws IOException {
@@ -111,7 +113,7 @@ public class PersonControllerIT {
 			
 	        mockMvc.perform(post("/person")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(DBConstants.personToAdd)))
+	        		.content(mapper.writeValueAsString(personToAdd)))
 	            .andExpect(status().isOk());
 	        mockMvc.perform(get("/person?firstName=Adeline&lastName=Plus"))
             	.andExpect(status().isOk())
@@ -129,7 +131,7 @@ public class PersonControllerIT {
 			
 	        mockMvc.perform(put("/person?firstName=Eric&lastName=Cadigan")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(DBConstants.personToAdd)))
+	        		.content(mapper.writeValueAsString(personToAdd)))
 	            .andExpect(status().isOk());
 	        mockMvc.perform(get("/person?firstName=Eric&lastName=Cadigan"))
             	.andExpect(status().isOk())
@@ -149,7 +151,7 @@ public class PersonControllerIT {
 			
 	        mockMvc.perform(put("/person?firstName=Nemo&lastName=Personne")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(DBConstants.personToAdd)))
+	        		.content(mapper.writeValueAsString(personToAdd)))
 	            .andExpect(status().isOk());
 	        mockMvc.perform(get("/person?firstName=Nemo&lastName=Personne"))
             	.andExpect(status().isOk())

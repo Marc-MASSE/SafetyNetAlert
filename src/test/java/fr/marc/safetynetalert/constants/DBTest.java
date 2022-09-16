@@ -8,7 +8,7 @@ import fr.marc.safetynetalert.model.MedicalRecord;
 import fr.marc.safetynetalert.model.Person;
 
 /* 
- * Data base for service classes' unit test
+ * Data base used for service classes' unit test
  */
 
 public class DBTest {
