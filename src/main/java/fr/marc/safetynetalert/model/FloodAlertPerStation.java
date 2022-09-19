@@ -16,17 +16,6 @@ public class FloodAlertPerStation {
 	public FloodAlertPerStation() {
 	}
 	
-	public FloodAlertPerStation(String address, String firstName, String lastName, String phone, int age,
-			List<String> medications, List<String> allergies) {
-		this.address = address;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.age = age;
-		this.medications = medications;
-		this.allergies = allergies;
-	}
-
 
 	public String getAddress() {
 		return address;

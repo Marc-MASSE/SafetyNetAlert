@@ -1,4 +1,4 @@
-package fr.marc.safetynetalert.integration;
+package fr.marc.safetynetalert.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -26,7 +26,7 @@ import fr.marc.safetynetalert.service.impl.JsonDataService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FireStationControllerIT {
+public class FireStationControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;

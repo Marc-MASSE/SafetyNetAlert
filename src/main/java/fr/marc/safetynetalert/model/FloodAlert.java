@@ -11,11 +11,7 @@ public class FloodAlert {
 	public FloodAlert() {
 	}
 
-	public FloodAlert(String stationNumber, List<FloodAlertPerStation> floodAlertPerStation) {
-		this.stationNumber = stationNumber;
-		this.floodAlertPerStation = floodAlertPerStation;
-	}
-
+	
 	public String getStationNumber() {
 		return stationNumber;
 	}

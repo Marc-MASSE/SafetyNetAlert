@@ -10,14 +10,8 @@ public class ChildAlert {
 
 	public ChildAlert() {
 	}
-	
-	
-	public ChildAlert(List<Child> child, List<Child> otherMember) {
-		this.child = child;
-		this.otherMember = otherMember;
-	}
-	
 
+	
 	public List<Child> getChild() {
 		return child;
 	}

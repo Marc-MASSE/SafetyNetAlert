@@ -19,14 +19,6 @@ public class JsonData {
 	public JsonData() {
 	}
 	
-
-	public JsonData(List<Person> persons, List<FireStation> fireStations, List<MedicalRecord> medicalRecords) {
-		super();
-		this.persons = persons;
-		this.fireStations = fireStations;
-		this.medicalRecords = medicalRecords;
-	}
-
 	
 	public List<Person> getPersons() {
 		return persons;

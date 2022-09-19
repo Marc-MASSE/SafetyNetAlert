@@ -1,4 +1,4 @@
-package fr.marc.safetynetalert.integration;
+package fr.marc.safetynetalert.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PersonInfoControllerIT {
+public class PersonInfoControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;

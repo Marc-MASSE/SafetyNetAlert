@@ -16,18 +16,6 @@ public class FireAlert {
 	public FireAlert() {
 	}
 	
-	
-	public FireAlert(String firstName, String lastName, String phone, int age, List<String> medications,
-			List<String> allergies, String stationNumber) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.age = age;
-		this.medications = medications;
-		this.allergies = allergies;
-		this.stationNumber = stationNumber;
-	}
-	
 
 	public String getFirstName() {
 		return firstName;

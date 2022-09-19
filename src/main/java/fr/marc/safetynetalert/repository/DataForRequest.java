@@ -30,10 +30,6 @@ public class DataForRequest {
 		this.medicalRecordService = medicalRecordService;
 	}
 	
-	public DataForRequest() {
-	}
-	
-	
 	private LocalDate now = LocalDate.now();
 	
 	

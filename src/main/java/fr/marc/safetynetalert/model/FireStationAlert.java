@@ -11,14 +11,7 @@ public class FireStationAlert {
 	public FireStationAlert() {
 	}
 
-	public FireStationAlert(int adultNumber, int childNumber,
-			List<FireStationAlertPerson> personDataForFireStationList) {
-
-		this.adultNumber = adultNumber;
-		this.childNumber = childNumber;
-		this.FireStationAlertPersonList = personDataForFireStationList;
-	}
-
+	
 	public int getAdultNumber() {
 		return adultNumber;
 	}

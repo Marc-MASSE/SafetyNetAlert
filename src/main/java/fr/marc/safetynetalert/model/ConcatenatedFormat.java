@@ -18,18 +18,6 @@ public class ConcatenatedFormat {
 	public ConcatenatedFormat() {
 	}
 
-	public ConcatenatedFormat(String firstName, String lastName, String address, String phone, String email,
-			String stationNumber, int age, List<String> medications, List<String> allergies) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.phone = phone;
-		this.email = email;
-		this.stationNumber = stationNumber;
-		this.age = age;
-		this.medications = medications;
-		this.allergies = allergies;
-	}
 
 	public String getFirstName() {
 		return firstName;

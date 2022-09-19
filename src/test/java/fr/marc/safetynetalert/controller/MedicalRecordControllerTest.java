@@ -1,4 +1,4 @@
-package fr.marc.safetynetalert.integration;
+package fr.marc.safetynetalert.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -21,20 +22,20 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fr.marc.safetynetalert.model.Person;
+import fr.marc.safetynetalert.model.MedicalRecord;
 import fr.marc.safetynetalert.service.impl.JsonDataService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PersonControllerIT {
-
+public class MedicalRecordControllerTest {
+	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@Autowired
 	JsonDataService jsonDataService;
 	
-	private Person personToAdd = new Person("Adeline","Plus","1 rue de Chanteloup","Limoges","87000","12-34-56-78-00","adplus@email.com");
+	private MedicalRecord medicalRecordToAdd = new MedicalRecord("Adeline","Plus","05/17/1983",List.of("Camomille"),List.of("Tilleul"));
 	
 	@BeforeEach
 	public void cleanUpTheDataBase() throws IOException {
@@ -43,18 +44,21 @@ public class PersonControllerIT {
 	
 
 	@Test
-	    public void getPersons() throws Exception {
-	        mockMvc.perform(get("/persons"))
+	    public void getMedicalRecords() throws Exception {
+	        mockMvc.perform(get("/medicalRecords"))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$[0].firstName", is("John")))
-	            .andExpect(jsonPath("$[0].lastName", is("Boyd")));
+	            .andExpect(jsonPath("$[0].lastName", is("Boyd")))
+	            .andExpect(jsonPath("$[0].birthdate", is("03/06/1984")))
+	            .andExpect(jsonPath("$[0].medications", is(List.of("aznol:350mg", "hydrapermazol:100mg"))))
+	            .andExpect(jsonPath("$[0].allergies", is(List.of("nillacilan"))));
 	    }
-	
+
 	@Nested
-	class GetPerson {
+	class GetMedicalRecord {
 		@Test
 	    public void success() throws Exception {
-	        mockMvc.perform(get("/person?firstName=Eric&lastName=Cadigan"))
+	        mockMvc.perform(get("/medicalRecord?firstName=Eric&lastName=Cadigan"))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("firstName", is("Eric")))
 	            .andExpect(jsonPath("lastName", is("Cadigan")));
@@ -62,60 +66,42 @@ public class PersonControllerIT {
 		
 		@Test
 	    public void no_answer() throws Exception {
-	        mockMvc.perform(get("/person?firstName=Nemo&lastName=Personne"))
+	        mockMvc.perform(get("/medicalRecord?firstName=Nemo&lastName=Personne"))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$[0]").doesNotExist());
 	    }
 	}
 
-
 	@Nested
-	class GetEmailByCity {
+	class DeleteMedicalRecord {
 		@Test
 	    public void success() throws Exception {
-	        mockMvc.perform(get("/communityEmail?city=Culver"))
-	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[0]", is("jaboyd@email.com")));
-	    }
-		
-		@Test
-	    public void no_answer() throws Exception {
-	        mockMvc.perform(get("/communityEmail?city=Nowhere"))
-	            .andExpect(status().isOk())
-	            .andExpect(jsonPath("$[0]").doesNotExist());
-	    }
-	}
-	
-	@Nested
-	class DeletePerson {
-		@Test
-	    public void success() throws Exception {
-	        mockMvc.perform(delete("/person?firstName=Eric&lastName=Cadigan"))
+	        mockMvc.perform(delete("/medicalRecord?firstName=Eric&lastName=Cadigan"))
 	            .andExpect(status().isOk());
-	        mockMvc.perform(get("/person?firstName=Eric&lastName=Cadigan"))
+	        mockMvc.perform(get("/medicalRecord?firstName=Eric&lastName=Cadigan"))
             	.andExpect(status().isOk())
             	.andExpect(jsonPath("$[0]").doesNotExist());
 	    }
 		
 		@Test
 	    public void no_body() throws Exception {
-	        mockMvc.perform(delete("/person?firstName=Nemo&lastName=Personne"))
+	        mockMvc.perform(delete("/medicalRecord?firstName=Nemo&lastName=Personne"))
 	            .andExpect(status().isOk());
 		}
 	}
 	
 	@Nested
-	class AddPerson {
+	class AddMedicalRecord {
 		@Test
 	    public void success() throws Exception {
 			
 			ObjectMapper mapper = new ObjectMapper();  
 			
-	        mockMvc.perform(post("/person")
+	        mockMvc.perform(post("/medicalRecord")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(personToAdd)))
+	        		.content(mapper.writeValueAsString(medicalRecordToAdd)))
 	            .andExpect(status().isOk());
-	        mockMvc.perform(get("/person?firstName=Adeline&lastName=Plus"))
+	        mockMvc.perform(get("/medicalRecord?firstName=Adeline&lastName=Plus"))
             	.andExpect(status().isOk())
 	            .andExpect(jsonPath("firstName", is("Adeline")))
 	            .andExpect(jsonPath("lastName", is("Plus")));
@@ -129,19 +115,17 @@ public class PersonControllerIT {
 			
 			ObjectMapper mapper = new ObjectMapper();  
 			
-	        mockMvc.perform(put("/person?firstName=Eric&lastName=Cadigan")
+	        mockMvc.perform(put("/medicalRecord?firstName=Eric&lastName=Cadigan")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(personToAdd)))
+	        		.content(mapper.writeValueAsString(medicalRecordToAdd)))
 	            .andExpect(status().isOk());
-	        mockMvc.perform(get("/person?firstName=Eric&lastName=Cadigan"))
+	        mockMvc.perform(get("/medicalRecord?firstName=Eric&lastName=Cadigan"))
             	.andExpect(status().isOk())
 	            .andExpect(jsonPath("firstName", is("Eric")))
 	            .andExpect(jsonPath("lastName", is("Cadigan")))
-	            .andExpect(jsonPath("address", is("1 rue de Chanteloup")))
-	            .andExpect(jsonPath("city", is("Limoges")))
-	            .andExpect(jsonPath("zip", is("87000")))
-	            .andExpect(jsonPath("phone", is("12-34-56-78-00")))
-	            .andExpect(jsonPath("email", is("adplus@email.com")));
+	            .andExpect(jsonPath("birthdate", is("05/17/1983")))
+	            .andExpect(jsonPath("medications", is(List.of("Camomille"))))
+	            .andExpect(jsonPath("allergies", is(List.of("Tilleul"))));
 	    }
 		
 		@Test
@@ -149,16 +133,15 @@ public class PersonControllerIT {
 			
 			ObjectMapper mapper = new ObjectMapper();  
 			
-	        mockMvc.perform(put("/person?firstName=Nemo&lastName=Personne")
+	        mockMvc.perform(put("/medicalRecord?firstName=Nemo&lastName=Personne")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(mapper.writeValueAsString(personToAdd)))
+	        		.content(mapper.writeValueAsString(medicalRecordToAdd)))
 	            .andExpect(status().isOk());
-	        mockMvc.perform(get("/person?firstName=Nemo&lastName=Personne"))
+	        mockMvc.perform(get("/medicalRecord?firstName=Nemo&lastName=Personne"))
             	.andExpect(status().isOk())
 	            .andExpect(jsonPath("$[0]").doesNotExist());
 	    }
 	}
 	
+
 }
-
-
