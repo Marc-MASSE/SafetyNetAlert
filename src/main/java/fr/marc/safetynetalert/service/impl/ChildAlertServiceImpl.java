@@ -3,6 +3,8 @@ package fr.marc.safetynetalert.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ import fr.marc.safetynetalert.service.IChildAlertService;
 public class ChildAlertServiceImpl implements IChildAlertService {
 
 	private DataForRequest dataForRequest;
+	
+	static Logger log = LogManager.getLogger(ChildAlertServiceImpl.class.getName());
 	
 	@Autowired
 	public ChildAlertServiceImpl(DataForRequest dataForRequest) {
@@ -65,6 +69,8 @@ public class ChildAlertServiceImpl implements IChildAlertService {
 			if (!childList.isEmpty()) {
 				childAlert.setChild(childList);
 				childAlert.setOtherMember(adultList);
+			}else {
+				log.warn("No child at this address");
 			}
 		});
 		
